@@ -1,0 +1,6 @@
+﻿  GameObject.cpp
+c:\users\karel\documents\k drizzle\games programming\second year\further fundamentals of games & concepts\semester 2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.h(21): warning C4458: declaration of 'useConstAccel' hides class member
+  c:\users\karel\documents\k drizzle\games programming\second year\further fundamentals of games & concepts\semester 2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.h(51): note: see declaration of 'Particle::useConstAccel'
+c:\users\karel\documents\k drizzle\games programming\second year\further fundamentals of games & concepts\semester 2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobject.cpp(15): warning C4100: 't': unreferenced formal parameter
+  DX11 Framework.vcxproj -> C:\Users\Karel\Documents\K Drizzle\Games Programming\Second Year\Further Fundamentals of Games & Concepts\Semester 2\COSE50581 Tutorial Framework Semester 2\FGGC Framework Semester 2\Debug\DX11 Framework.exe
+  DX11 Framework.vcxproj -> C:\Users\Karel\Documents\K Drizzle\Games Programming\Second Year\Further Fundamentals of Games & Concepts\Semester 2\COSE50581 Tutorial Framework Semester 2\FGGC Framework Semester 2\Debug\DX11 Framework.pdb (Full PDB)

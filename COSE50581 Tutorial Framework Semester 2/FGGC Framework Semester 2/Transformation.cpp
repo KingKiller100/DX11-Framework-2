@@ -1,0 +1,31 @@
+#include "Transformation.h"
+
+Transformation::Transformation()
+{
+	_position = Vector3D();
+	_rotation = Vector3D();
+	_scale = Vector3D(1.0f, 1.0f, 1.0f);
+}
+
+Transformation::~Transformation()
+{
+}
+
+// Calculate world matrix
+XMMATRIX Transformation::GetTranslationMatrix()
+{
+	XMMATRIX translation = XMMatrixTranslation(_position.x, _position.y, _position.z);
+	return translation;
+}
+
+XMMATRIX Transformation::GetScaleMatrix()
+{
+	XMMATRIX scale = XMMatrixScaling(_scale.x, _scale.y, _scale.z);
+	return scale;
+}
+
+XMMATRIX Transformation::GetRotationMatrix()
+{
+	XMMATRIX rotation = XMMatrixRotationX(_rotation.x) * XMMatrixRotationY(_rotation.y) * XMMatrixRotationZ(_rotation.z);
+	return rotation;
+}

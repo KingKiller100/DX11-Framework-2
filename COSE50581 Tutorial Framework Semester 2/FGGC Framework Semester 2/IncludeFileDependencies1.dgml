@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1 @16)" Category="CodeSchema_ProjectItem" Bounds="8.66667778366103,152.022650072109,110.491333410412,25.998000077079" FilePath="$(VsSolution)\Application.h" Label="Application.h" />
+    <Node Id="(@1 @17)" Category="CodeSchema_ProjectItem" Bounds="20.0000178676494,273.016411038283,148.098000077079,25.998000077079" FilePath="$(VsSolution)\DDSTextureLoader.h" Label="DDSTextureLoader.h" />
+    <Node Id="(@1 @26)" Category="CodeSchema_ProjectItem" Bounds="160.158011194073,152.020210884125,116.234666743746,25.998000077079" FilePath="$(VsSolution)\GameObject.h" Label="GameObject.h" UseManualLocation="True" />
+    <Node Id="(@1 @3)" Category="CodeSchema_ProjectItem" Bounds="266.85599574734,31.0241097084131,90.818000077079,25.998000077079" FilePath="$(VsSolution)\Camera.h" Label="Camera.h" />
+    <Node Id="(@1 @33)" Category="CodeSchema_ProjectItem" Bounds="272.772679232149,87.0222097854921,103.678000077079,25.998000077079" FilePath="$(VsSolution)\Camera.cpp" Label="Camera.cpp" />
+    <Node Id="(@1 @34)" Category="CodeSchema_ProjectItem" Bounds="147.027995670261,31.0241097084131,89.8280000770791,25.998000077079" FilePath="$(VsSolution)\Main.cpp" Label="Main.cpp" />
+    <Node Id="(@1 @35)" Category="CodeSchema_ProjectItem" Bounds="312.392669498924,152.022553001011,123.351333410412,25.998000077079" FilePath="$(VsSolution)\Application.cpp" Label="Application.cpp" />
+    <Node Id="(@1 @36)" Category="CodeSchema_ProjectItem" Bounds="198.098003440464,273.016411038283,160.958000077079,25.998000077079" FilePath="$(VsSolution)\DDSTextureLoader.cpp" Label="DDSTextureLoader.cpp" />
+    <Node Id="(@1 @39)" Category="CodeSchema_ProjectItem" Bounds="19.999999391799,217.018310961204,129.094666743746,25.998000077079" FilePath="$(VsSolution)\GameObject.cpp" Label="GameObject.cpp" />
+    <Node Id="(@1 @4)" Category="CodeSchema_ProjectItem" Bounds="147.02801147676,87.0222097854921,95.7446667437457,25.998000077079" FilePath="$(VsSolution)\resource.h" Label="resource.h" />
+    <Node Id="(@1 @40)" Category="CodeSchema_ProjectItem" Bounds="179.09468150036,217.018310961204,142.821333410412,25.998000077079" FilePath="$(VsSolution)\DX11 Framework.fx" Label="DX11 Framework.fx" />
+    <Node Id="@11" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\ucrt\corecrt_math.h" Label="corecrt_math.h" />
+    <Node Id="@13" Category="CodeSchema_ProjectItem" FilePath="$(VsInstallDir)\VC\Tools\MSVC\14.11.25503\include\concurrencysal.h" Label="concurrencysal.h" />
+    <Node Id="@15" Category="CodeSchema_ProjectItem" FilePath="$(VsInstallDir)\VC\Tools\MSVC\14.11.25503\include\sal.h" Label="sal.h" />
+    <Node Id="@19" Category="CodeSchema_ProjectItem" Bounds="26.4300041116787,96.024550741735,84.168000077079,25.998000077079" FilePath="$(VsSolution)\Vector.h" Label="Vector.h" />
+    <Node Id="@2" Category="CodeSchema_PoundIncludeFile" Bounds="-11.3333280438519,-8.97599029158692,467.077342608208,327.990501406949" FilePath="$(VsSolution)\DX11 Framework.vcxproj" Group="Expanded" Label="DX11 Framework.vcxproj" Language="{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}" />
+    <Node Id="@21" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\ucrt\corecrt_math_defines.h" Label="corecrt_math_defines.h" />
+    <Node Id="@23" Category="CodeSchema_ProjectItem" FilePath="$(VsInstallDir)\VC\Tools\MSVC\14.11.25503\include\vadefs.h" Label="vadefs.h" />
+    <Node Id="@25" Category="CodeSchema_ProjectItem" FilePath="$(VsInstallDir)\VC\Tools\MSVC\14.11.25503\include\CodeAnalysis\sourceannotations.h" Label="sourceannotations.h" />
+    <Node Id="@28" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\ucrt\corecrt.h" Label="corecrt.h" />
+    <Node Id="@30" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\shared\winpackagefamily.h" Label="winpackagefamily.h" />
+    <Node Id="@32" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\shared\winapifamily.h" Label="winapifamily.h" />
+    <Node Id="@38" Category="CodeSchema_ProjectItem" Bounds="20.0000041112638,40.026546298356,97.028000077079,25.998000077079" FilePath="$(VsSolution)\Vector.cpp" Label="Vector.cpp" />
+    <Node Id="@7" Category="CodeSchema_ProjectItem" FilePath="$(VsInstallDir)\VC\Tools\MSVC\14.11.25503\include\vcruntime.h" Label="vcruntime.h" />
+    <Node Id="@9" Category="CodeSchema_ProjectItem" FilePath="$(ProgramFiles)\Windows Kits\10\Include\10.0.15063.0\ucrt\math.h" Label="math.h" />
+    <Node Id="G4" Category="CodeSchema_PoundIncludeGroup" Bounds="168.145687635619,351.232916501866,113.803333333333,25" Group="Collapsed" Label="Windows SDK" UseManualLocation="True" />
+    <Node Id="OthersGroup" Category="CodeSchema_PoundIncludeGroup" Bounds="187.311593408952,406.197276501866,75.4466666666667,25" Group="Collapsed" Label="Others" UseManualLocation="True" />
+    <Node Id="PoundIncludeGraphExternalsGroup" Category="Externals" Bounds="181.538858682895,349.014611115362,86.99481056,25.0082800216001" Group="Collapsed" Label="Externals" UseManualLocation="True" />
+    <Node Id="Windows SDK Indirectly Included" Category="CodeSchema_PoundIncludeGroup" Group="Collapsed" Label="Indirectly Included" />
+  </Nodes>
+  <Links>
+    <Link Source="@11" Target="@28" Category="PoundInclude" />
+    <Link Source="@15" Target="@13" Category="PoundInclude" />
+    <Link Source="@15" Target="@25" Category="PoundInclude" />
+    <Link Source="@19" Target="@9" Category="PoundInclude" />
+    <Link Source="@2" Target="(@1 @16)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @17)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @26)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @3)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @33)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @34)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @35)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @36)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @39)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @4)" Category="Contains" />
+    <Link Source="@2" Target="(@1 @40)" Category="Contains" />
+    <Link Source="@2" Target="@19" Category="Contains" />
+    <Link Source="@2" Target="@38" Category="Contains" />
+    <Link Source="@28" Target="@32" Category="PoundInclude" />
+    <Link Source="@28" Target="@7" Category="PoundInclude" />
+    <Link Source="@32" Target="@30" Category="PoundInclude" />
+    <Link Source="@38" Target="@19" Category="PoundInclude" Bounds="68.513997959849,66.0244499950298,3.76112910771553E-06,21.0001000000001" />
+    <Link Source="@7" Target="@15" Category="PoundInclude" />
+    <Link Source="@7" Target="@23" Category="PoundInclude" />
+    <Link Source="@9" Target="@11" Category="PoundInclude" />
+    <Link Source="@9" Target="@21" Category="PoundInclude" />
+    <Link Source="G4" Target="@9" Category="Contains" />
+    <Link Source="G4" Target="Windows SDK Indirectly Included" Category="Contains" />
+    <Link Source="OthersGroup" Target="@13" Category="Contains" />
+    <Link Source="OthersGroup" Target="@15" Category="Contains" />
+    <Link Source="OthersGroup" Target="@23" Category="Contains" />
+    <Link Source="OthersGroup" Target="@25" Category="Contains" />
+    <Link Source="OthersGroup" Target="@7" Category="Contains" />
+    <Link Source="PoundIncludeGraphExternalsGroup" Target="G4" Category="Contains" />
+    <Link Source="PoundIncludeGraphExternalsGroup" Target="OthersGroup" Category="Contains" />
+    <Link Source="Windows SDK Indirectly Included" Target="@11" Category="Contains" />
+    <Link Source="Windows SDK Indirectly Included" Target="@21" Category="Contains" />
+    <Link Source="Windows SDK Indirectly Included" Target="@28" Category="Contains" />
+    <Link Source="Windows SDK Indirectly Included" Target="@30" Category="Contains" />
+    <Link Source="Windows SDK Indirectly Included" Target="@32" Category="Contains" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_PoundIncludeFile" Label="C++ Project File" BasedOn="File" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="C++ Project File" />
+    <Category Id="CodeSchema_PoundIncludeGroup" Label="#include Group" BasedOn="Group" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="#include Group" />
+    <Category Id="CodeSchema_ProjectItem" Label="Project Item" BasedOn="File" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Type" Icon="File" NavigationActionLabel="Project Items" />
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="Externals" Label="Externals" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Externals" />
+    <Category Id="File" Label="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="Files" />
+    <Category Id="Group" Label="Group" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Groups" />
+    <Category Id="PoundInclude" Label="#include" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="#include By" OutgoingActionLabel="#include" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="FilePath" Label="File Path" Description="File Path" DataType="System.String" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="Language" Label="Language" Description="Language" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
+    <Name Id="File" Label="File" ValueType="Uri" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(VsSolutionUri)/DX11 Framework.vcxproj" />
+    <Alias n="2" Id="(@1)" />
+    <Alias n="3" Uri="File=$(VsSolutionUri)/Camera.h" />
+    <Alias n="4" Uri="File=$(VsSolutionUri)/resource.h" />
+    <Alias n="5" Uri="Assembly=" />
+    <Alias n="6" Uri="File=$(VsInstallDirUri)/VC/Tools/MSVC/14.11.25503/include/vcruntime.h" />
+    <Alias n="7" Id="(@5 @6)" />
+    <Alias n="8" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/ucrt/math.h" />
+    <Alias n="9" Id="(@5 @8)" />
+    <Alias n="10" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/ucrt/corecrt_math.h" />
+    <Alias n="11" Id="(@5 @10)" />
+    <Alias n="12" Uri="File=$(VsInstallDirUri)/VC/Tools/MSVC/14.11.25503/include/concurrencysal.h" />
+    <Alias n="13" Id="(@5 @12)" />
+    <Alias n="14" Uri="File=$(VsInstallDirUri)/VC/Tools/MSVC/14.11.25503/include/sal.h" />
+    <Alias n="15" Id="(@5 @14)" />
+    <Alias n="16" Uri="File=$(VsSolutionUri)/Application.h" />
+    <Alias n="17" Uri="File=$(VsSolutionUri)/DDSTextureLoader.h" />
+    <Alias n="18" Uri="File=$(VsSolutionUri)/Vector.h" />
+    <Alias n="19" Id="(@1 @18)" />
+    <Alias n="20" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/ucrt/corecrt_math_defines.h" />
+    <Alias n="21" Id="(@5 @20)" />
+    <Alias n="22" Uri="File=$(VsInstallDirUri)/VC/Tools/MSVC/14.11.25503/include/vadefs.h" />
+    <Alias n="23" Id="(@5 @22)" />
+    <Alias n="24" Uri="File=$(VsInstallDirUri)/VC/Tools/MSVC/14.11.25503/include/CodeAnalysis/sourceannotations.h" />
+    <Alias n="25" Id="(@5 @24)" />
+    <Alias n="26" Uri="File=$(VsSolutionUri)/GameObject.h" />
+    <Alias n="27" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/ucrt/corecrt.h" />
+    <Alias n="28" Id="(@5 @27)" />
+    <Alias n="29" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/shared/winpackagefamily.h" />
+    <Alias n="30" Id="(@5 @29)" />
+    <Alias n="31" Uri="File=$(ProgramFilesUri)/Windows Kits/10/Include/10.0.15063.0/shared/winapifamily.h" />
+    <Alias n="32" Id="(@5 @31)" />
+    <Alias n="33" Uri="File=$(VsSolutionUri)/Camera.cpp" />
+    <Alias n="34" Uri="File=$(VsSolutionUri)/Main.cpp" />
+    <Alias n="35" Uri="File=$(VsSolutionUri)/Application.cpp" />
+    <Alias n="36" Uri="File=$(VsSolutionUri)/DDSTextureLoader.cpp" />
+    <Alias n="37" Uri="File=$(VsSolutionUri)/Vector.cpp" />
+    <Alias n="38" Id="(@1 @37)" />
+    <Alias n="39" Uri="File=$(VsSolutionUri)/GameObject.cpp" />
+    <Alias n="40" Uri="File=$(VsSolutionUri)/DX11 Framework.fx" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="C++ Project File" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_PoundIncludeFile')" />
+      <Setter Property="Background" Value="#FFEFEFEF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externals" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FFA08080" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Source File" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_ProjectItem')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="#include Group" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_PoundIncludeGroup')" />
+      <Setter Property="Background" Value="#FFEFEFEF" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="ProgramFiles" Value="C:\Program Files (x86)" />
+    <Path Id="ProgramFilesUri" Value="file:///C:/Program Files (x86)" />
+    <Path Id="VsInstallDir" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" />
+    <Path Id="VsInstallDirUri" Value="file:///C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise" />
+    <Path Id="VsSolution" Value="C:\Users\d012120g\Documents\Semester 2\COSE50581 Tutorial Framework Semester 2\FGGC Framework Semester 2" />
+    <Path Id="VsSolutionUri" Value="file:///C:/Users/d012120g/Documents/Semester 2/COSE50581 Tutorial Framework Semester 2/FGGC Framework Semester 2" />
+  </Paths>
+</DirectedGraph>
