@@ -1,62 +1,93 @@
 #pragma once
 #include <d3d11_1.h>
 #include "Transformation.h"
+#include "ForceGenerator.h"
+#include <vector>
+#include <iostream>
 
 class Particle
 {
-public:
-	Particle(Transformation* _transform, Vector3D initialVelocity, Vector3D initialAcceleration, float mass);
-	~Particle();
-	
-	// Velocity Getters and Setters
-	void SetVelocity(Vector3D v) { _velocity = v; }
-	void SetVelocityXYZ(Vector3D v) { _velocity.x = v.x, _velocity.y = v.y, _velocity.z = v.z; }
-
-	float GetSpeed() { return Vector3D::GetMagnitude(_velocity); }
-	Vector3D GetVelocity() { return _velocity; }
-
-	// Acceleration Getters and Setters
-	void SetAcceleration(Vector3D a) { _acceleration = a; }
-	void SetAccelerationXYZ(Vector3D a) { _acceleration.x = a.x, _acceleration.y = a.y, _acceleration.z = a.z; }
-	void UseConstAcceleration(bool useConstAccel) { this->useConstAccel = useConstAccel; }
-
-	float GetAccelerationMagnitude() { return Vector3D::GetMagnitude(_acceleration); }
-	Vector3D GetAcceleration() { return _acceleration; }
-
-	// Mass Getters and Setters
-	void SetMass(float mass) { _mass = mass; }
-	float GetMass() { return _mass; }
-
-	// Update Physics
-	void Update(float t);
-
-	void UpdateVelocity(float t);
-	// Update acceleration of object using Newton's Laws of Physics
-	// Assumption: net external force is constant between consecutive updates of object state
-	void UpdateAccelerate(float t);
-	void CalculateNetForce();
-
 private:
 	Transformation* _transform;
 	Vector3D _velocity;
 	Vector3D _acceleration;
-	float _mass;
-
-	bool useConstAccel;
-
-	// Force Variables
-	Vector3D force;
 	Vector3D netForce;
+	Vector3D thrustForce = Vector3D();
+	std::vector<ForceGenerator*> _forceGenerators;
 
-	// Physics methods
-	void MoveWithConstVel(float t); // Update world position of object by adding displacement to precious position
-	void MoveWithConstAccel(float t); // Update state of game object moving relative to previous position
+	float generalFriction;
 
-	// Object movement
-	void HandleInput(float t);
-	void MoveForward(float t);
-	void MoveBackward(float t);
-	void MoveRight(float t);
-	void MoveLeft(float t);
+	float _radius;
+	float _mass;
+	float coefficientOfRestitution;
+	float maxSpeed = 55;
+
+	float lifeTimer;
+
+	bool isLaminar;
+	bool isKillable;
+
+private:
+	void UpdateNetForce(float t);
+	void UpdateAccel();
+	void MoveParticle(float t);
+	void UpdateVelocity(float t);
+
+public:
+	Particle(Transformation* _transform);
+	~Particle();
+	
+	// Transform Accessor Methods
+	Transformation* getTransformation()								const { return _transform; }
+
+	// Radius Accessor Methods
+	void SetRadius(float r)											{ _radius = fabsf(r); }
+	float GetRadius()												const { return _radius; }
+
+	// Velocity Accessor Methods
+	void SetVelocity(Vector3D v)									{ _velocity = v; }
+	void SetVelocity(float x, float y, float z)						{ _velocity.x = x, _velocity.y = y, _velocity.z = z; }
+	float GetSpeed()												const { return Vector3D::GetMagnitude(_velocity); }
+	Vector3D GetVelocity()											const { return _velocity; }
+
+	// Acceleration Accessor Methods
+	void SetAcceleration(Vector3D a)								{ _acceleration = a; }
+	void SetAcceleration(float x, float y, float z)					{ _acceleration.x = x, _acceleration.y = y, _acceleration.z = z; }
+	float GetAccelerationMagnitude()								const { return Vector3D::GetMagnitude(_acceleration); }
+	Vector3D GetAcceleration()										const { return _acceleration; }
+
+	// Sets whether object is laminar or not
+	void SwitchLaminarOn(const bool l)								{ isLaminar = l; }
+	bool isLaminarOn()												const { return isLaminar; }
+
+	// Mass Accessor Methods
+	void SetMass(const float mass)									{ _mass = mass; }
+	float GetMass()													const { return _mass; }
+
+	// Coefficient of Restitution Accessors
+	float GetCoefficientOfRestitution()								{ return coefficientOfRestitution; }
+	void SetCoefficientOfRestitution(float cor)						{ coefficientOfRestitution = cor; }
+
+	// Thrust Accessor Methods
+	void SetThrust(Vector3D v)										{ thrustForce = v; }
+	void AddThrust()												{ thrustForce = Vector3D(0.0f, 20.0f, 0.0f); }
+	void AddThrust(Vector3D thrust)									{ thrustForce = thrust; }
+	Vector3D GetThrust()											const { return thrustForce; }
+
+	// MaxSpeed Accessor Methods
+	float GetMaxSpeed()												{ return maxSpeed; }
+
+	// Particle's life Accessor Methods
+	int GetLifetimer()												{ return lifeTimer; }
+	void ResetLifeTimer()											{ lifeTimer = 0; }
+
+	// Sets whether particle should be reset or not
+	bool GetIsKillable()											{ return isKillable; }
+	void IsKillableOn(const bool k)									{ isKillable = k; }
+
+	void AddForce(Vector3D& f);
+	void AddGenerator(ForceGenerator* fg);
+
+	void Update(const float t);
 };
 

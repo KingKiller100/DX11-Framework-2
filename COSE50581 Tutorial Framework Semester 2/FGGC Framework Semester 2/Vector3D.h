@@ -1,5 +1,9 @@
 #pragma once
+
 #include <math.h>
+
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 struct Vector3D
 {
@@ -23,7 +27,17 @@ struct Vector3D
 	static Vector3D CrossProduct(const Vector3D& u, const Vector3D& v);
 
 	// Normalizes a vector
-	void Normalize();
+	static Vector3D Normalize(Vector3D v);
+
+	// Sets all values of the vector to zero
+	void Zero();
+
+	void Truncate(float max);
+
+	Vector3D ReverseVector();
+
+	// Calculates distance between two 3D objects
+	float Distance(const Vector3D &v);
 
 	// Overloads + operator to add two vectors objects
 	Vector3D operator+(const Vector3D& v) const
@@ -79,11 +93,62 @@ struct Vector3D
 		return !(this->x == v.x && this->y == v.y && this->z == v.z);
 	}
 
+	// adds to current vector3d value
 	Vector3D& operator+=(const Vector3D& v)
 	{
 		this->x = this->x + v.x;
 		this->y = this->y + v.y;
 		this->z = this->z + v.z;
+
+		return *this;
+	}
+
+	// divides current vector3d value
+	Vector3D& operator-=(const Vector3D& v)
+	{
+		this->x = this->x - v.x;
+		this->y = this->y - v.y;
+		this->z = this->z - v.z;
+
+		return *this;
+	}
+
+	// divides current vector3d value and sets variable to it
+	Vector3D& operator/=(const Vector3D& v)
+	{
+		this->x = this->x / v.x;
+		this->y = this->y / v.y;
+		this->z = this->z / v.z;
+
+		return *this;
+	}
+
+	// divides current vector3d value by a float and sets variable to it
+	Vector3D& operator/=(const float& f)
+	{
+		this->x = this->x / f;
+		this->y = this->y / f;
+		this->z = this->z / f;
+
+		return *this;
+	}
+
+	// multiplies current vector3d value and sets variable to it
+	Vector3D& operator*=(const Vector3D& v)
+	{
+		this->x = this->x * v.x;
+		this->y = this->y * v.y;
+		this->z = this->z * v.z;
+
+		return *this;
+	}
+
+	// multiply current vector3d value by a float and sets variable to it
+	Vector3D& operator*=(const float& f)
+	{
+		this->x = this->x * f;
+		this->y = this->y * f;
+		this->z = this->z * f;
 
 		return *this;
 	}

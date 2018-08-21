@@ -2,6 +2,8 @@
 
 Transformation::Transformation()
 {
+	_parent = nullptr;
+
 	_position = Vector3D();
 	_rotation = Vector3D();
 	_scale = Vector3D(1.0f, 1.0f, 1.0f);
@@ -28,4 +30,14 @@ XMMATRIX Transformation::GetRotationMatrix()
 {
 	XMMATRIX rotation = XMMatrixRotationX(_rotation.x) * XMMatrixRotationY(_rotation.y) * XMMatrixRotationZ(_rotation.z);
 	return rotation;
+}
+
+void Transformation::UpdateWorldMatrix()
+{
+	XMStoreFloat4x4(&_world, GetScaleMatrix() * GetRotationMatrix() * GetTranslationMatrix());
+
+	if (_parent)
+	{
+		XMStoreFloat4x4(&_world, this->GetWorldMatrix() * _parent->GetWorldMatrix());
+	}
 }

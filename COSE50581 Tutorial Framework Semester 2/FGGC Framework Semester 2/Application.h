@@ -8,22 +8,16 @@
 #include "DDSTextureLoader.h"
 #include "resource.h"
 #include "Camera.h"
-#include "Vector3D.h"
 
 #include <vector>
-/*
-//#include <SpriteFont.h>
-#include "CommonStates.h"
-//#include "DDSTextureLoader.h"
-#include "Effects.h"
-#include "GeometricPrimitive.h"
-#include "Model.h"
-#include "PrimitiveBatch.h"
-#include "ScreenGrab.h"
-#include "SpriteBatch.h"
-#include "SpriteFont.h"
-#include "VertexTypes.h"
-*/
+
+#include "Vector3D.h"
+#include "ControllerManager.h"
+#include "CollisionsManager.h"
+#include "ParticleSystem.h"
+#include "Appearance.h"
+#include "Particle.h"
+#include "Transformation.h"
 #include "GameObject.h"
 
 using namespace DirectX;
@@ -94,25 +88,32 @@ private:
 
 	ID3D11ShaderResourceView * _pTextureRV = nullptr;
 
+	ID3D11ShaderResourceView * _pFootballRV = nullptr;
+
 	ID3D11ShaderResourceView * _pGroundTextureRV = nullptr;
 
 	ID3D11SamplerState * _pSamplerLinear = nullptr;
 
 	Light basicLight;
 
-	vector<GameObject *> _gameObjects;
-
-	Camera * _camera;
+	Camera* _camera;
 	float _cameraOrbitRadius = 7.0f;
 	float _cameraOrbitRadiusMin = 2.0f;
 	float _cameraOrbitRadiusMax = 50.0f;
 	float _cameraOrbitAngleXZ = -90.0f;
 	float _cameraSpeed = 2.0f;
 
+	// Number of particles created
+	const int numOfObjects = 50;
+
 	UINT _WindowHeight;
 	UINT _WindowWidth;
 
-	int currentObject;
+	ParticleSystem* particleSystem;
+//	vector<GameObject *> _gameObjects;
+	GravityGenerator* gravity;
+	LaminarDragGenerator* lamDrag;
+	TurbulentDragGenerator* turbDrag;
 
 	// Render dimensions - Change here to alter screen resolution
 	UINT _renderHeight = 1080;
@@ -124,11 +125,10 @@ private:
 	ID3D11RasterizerState* CCWcullMode;
 	ID3D11RasterizerState* CWcullMode;
 
-	float presetFrameInterval = 60.0f;
 private:
+	void Cleanup();
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 	HRESULT InitDevice();
-	void Cleanup();
 	HRESULT CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 	HRESULT InitShadersAndInputLayout();
 	HRESULT InitVertexBuffer();

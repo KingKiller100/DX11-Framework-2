@@ -1,178 +1,79 @@
 #include "Particle.h"
 
-Particle::Particle(Transformation * _transform, Vector3D initialVelocity, Vector3D initialAcceleration, float mass)
+Particle::Particle(Transformation * transform)
 {
-	this->_transform = _transform;
-	_velocity = initialVelocity;
-	_acceleration = initialAcceleration;
-	_mass = mass;
+	_transform = transform;
+	
+	generalFriction = 0.98f;
+	_radius = 0.5f;
+	_mass = 1.0f;
 
+	coefficientOfRestitution = 0.5462f;
+
+	_velocity = Vector3D();
+	_acceleration = Vector3D();
 	netForce = Vector3D();
-	force = Vector3D();
 
-	useConstAccel = false;
+	isLaminar = true;
+	isKillable = false;
+
+	lifeTimer = -1;
 }
 
 Particle::~Particle()
 {
-	if (_transform)
-	{
-		delete _transform;
-		_transform = nullptr;
-	}
 }
 
 void Particle::Update(float t)
 {
-	if (_mass >= 0.0f)
-	{
-		if (GetAsyncKeyState('V'))
-		{
-			useConstAccel = false;
-		}
-		if (GetAsyncKeyState('X'))
-		{
-			useConstAccel = true;
-		}
+	if (_mass < 0)
+		return;
 
-		if (useConstAccel == true)
-		{
-			MoveWithConstAccel(t);
-		}
-		else
-		{
-			MoveWithConstVel(t);
-		}
-	}
-	
+	UpdateNetForce(t);
+	UpdateAccel();
+	MoveParticle(t);
+	UpdateVelocity(t);
+
+	netForce.Zero();
+
+	lifeTimer += t;  
 }
 
-void Particle::MoveWithConstVel(float t)
+void Particle::AddForce(Vector3D &f)
 {
-	if (_velocity.z * t > 0.2f)
+	netForce += f;
+}
+
+void Particle::AddGenerator(ForceGenerator* fg)
+{
+	_forceGenerators.push_back(fg);
+}
+
+void Particle::UpdateNetForce(float t)
+{
+	for (ForceGenerator* fg : _forceGenerators)
 	{
-		_velocity.z = 0.2f;
+		fg->Update(this, t);
 	}
-	if (_velocity.x * t > 0.2f)
-	{
-		_velocity.x = 0.2f;
-	}
-	if (_velocity.y * t > 0.2f)
-	{
-		_velocity.y = 0.2f;
-	}
-	HandleInput(t);
+}
+
+void Particle::MoveParticle(float t)
+{
+	Vector3D pos = _transform->GetPosition();
+	
+	pos += _velocity * t + _acceleration * t * t * 0.5f;
+	
+	_transform->SetPosition(pos);
 }
 
 void Particle::UpdateVelocity(float t)
 {
 	_velocity += _acceleration * t;
+	_velocity *= generalFriction;
+	//_velocity.Truncate(maxSpeed);
 }
 
-void Particle::UpdateAccelerate(float t)
+void Particle::UpdateAccel()
 {
-	_acceleration.x = netForce.x / _mass;
-	_acceleration.y = netForce.y / _mass;
-	_acceleration.z = netForce.z / _mass;
-}
-
-void Particle::CalculateNetForce()
-{
-	// calculate net external force
-	netForce.x += force.x;
-	netForce.y += force.y;
-	netForce.z += force.z;
-}
-
-void Particle::MoveWithConstAccel(float t)
-{
-	// Updates acceleration
-	HandleInput(t);
-}
-
-void Particle::HandleInput(float t)
-{
-	// Move gameobject
-	if (GetAsyncKeyState('W'))
-	{
-		MoveForward(t);
-	}
-	else if (GetAsyncKeyState('S'))
-	{
-		MoveBackward(t);
-	}
-	else if (GetAsyncKeyState('A'))
-	{
-		MoveLeft(t);
-	}
-	else if (GetAsyncKeyState('D'))
-	{
-		MoveRight(t);
-	}
-}
-
-void Particle::MoveForward(float t)
-{
-	Vector3D position = _transform->GetPosition();
-	
-	if (useConstAccel == true)
-	{
-		position.z -= (_velocity.z * t) + (0.5f * _acceleration.z * t * t);
-		UpdateVelocity(t);
-		//position.z -= _velocity.z;
-	}
-	else
-	{
-		position.z -= _velocity.z * t;
-	}
-
-	_transform->SetPosition(position);
-}
-
-void Particle::MoveBackward(float t)
-{
-	Vector3D position = _transform->GetPosition();
-	if (useConstAccel == true)
-	{
-		position.z += (_velocity.z * t) + (0.5f * _acceleration.z * t * t);
-		UpdateVelocity(t);
-		//position.z += _velocity.z;
-	}
-	else
-	{
-		position.z += _velocity.z * t;
-	}
-	_transform->SetPosition(position);
-}
-
-void Particle::MoveRight(float t)
-{
-	Vector3D position = _transform->GetPosition();
-	if (useConstAccel == true)
-	{
-		position.x += (_velocity.x * t) + (0.5f * _acceleration.x * t * t);
-		UpdateVelocity(t);
-		//position.z += _velocity.z;
-	}
-	else
-	{
-		position.x += _velocity.x * t;
-	}
-	_transform->SetPosition(position);
-}
-
-void Particle::MoveLeft(float t)
-{
-	Vector3D position = _transform->GetPosition();
-	if (useConstAccel == true)
-	{
-		position.x -= (_velocity.x * t) + (0.5f * _acceleration.x * t * t);
-		UpdateVelocity(t);
-		//position.z += _velocity.z;
-	}
-	else
-	{
-		position.x -= _velocity.x * t;
-	}
-	_transform->SetPosition(position);
+	_acceleration = netForce / _mass;
 }

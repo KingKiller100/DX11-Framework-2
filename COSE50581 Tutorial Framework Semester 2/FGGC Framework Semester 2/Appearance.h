@@ -12,17 +12,6 @@ struct Geometry
 
 	UINT vertexBufferStride;
 	UINT vertexBufferOffset;
-
-	Geometry operator=(const Geometry& newGeo) const
-	{
-		Geometry g;
-		g.indexBuffer = newGeo.indexBuffer;
-		g.numberOfIndices = newGeo.numberOfIndices;
-		g.vertexBuffer = newGeo.vertexBuffer;
-		g.vertexBufferOffset = newGeo.vertexBufferOffset;
-		g.vertexBufferStride = newGeo.vertexBufferStride;
-		return g;
-	}
 };
 
 struct Material
@@ -31,17 +20,6 @@ struct Material
 	XMFLOAT4 ambient;
 	XMFLOAT4 specular;
 	float specularPower;
-
-	Material operator=(const Material& newMat) const
-	{
-		Material m;
-		m.ambient = newMat.ambient;
-		m.diffuse = newMat.diffuse;
-		m.specular = newMat.specular;
-		m.specularPower = newMat.specularPower;
-
-		return m;
-	}
 };
 
 class Appearance
@@ -50,21 +28,16 @@ public:
 	Appearance(Geometry geometry, Material material);
 	~Appearance();
 
-	Geometry GetGeometryData() const { return _geometry; }
+	Geometry GetGeometryData()												const { return _geometry; }
 
-	Material GetMaterial() const { return _material; }
+	Material GetMaterial()													const { return _material; }
 
 
-	void SetTextureRV(ID3D11ShaderResourceView * textureRV) { _textureRV = textureRV; }
-	ID3D11ShaderResourceView * GetTextureRV() const { return _textureRV; }
-	bool HasTexture() const { return _textureRV ? true : false; }
+	void SetTextureRV(ID3D11ShaderResourceView * textureRV)					{ _textureRV = textureRV; }
+	ID3D11ShaderResourceView * GetTextureRV()								const { return _textureRV; }
+	bool HasTexture()														const { return _textureRV ? true : false; }
 
 	void Draw(ID3D11DeviceContext * pImmediateContext);
-
-	Appearance operator=(const Appearance& a) const
-	{
-		return Appearance(this->_geometry = a._geometry, this->_material = a._material);
-	}
 
 private:
 	Geometry _geometry;

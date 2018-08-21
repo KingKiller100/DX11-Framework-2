@@ -1,4 +1,5 @@
 #include "Application.h"
+#include <time.h>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -53,27 +54,27 @@ bool Application::HandleKeyboard(MSG msg)
 
 		// Switches which cube is active
 	case '1':
-		currentObject = 1;
+		ControllerManager::Instance()->SetCurrentObject(1);
 		return true;
 		break;
 
 	case '2':
-		currentObject = 2;
+		ControllerManager::Instance()->SetCurrentObject(2);
 		return true;
 		break;
 	
 	case '3':
-		currentObject = 3;
+		ControllerManager::Instance()->SetCurrentObject(3);
 		return true;
 		break;
 	
 	case '4':
-		currentObject = 4;
+		ControllerManager::Instance()->SetCurrentObject(4);
 		return true;
 		break;
 	
 	case '5':
-		currentObject = 5;
+		ControllerManager::Instance()->SetCurrentObject(5);
 		return true;
 		break;
 	}
@@ -109,6 +110,9 @@ Application::~Application()
 
 HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 {
+	//time_t* t = new time_t();
+	srand(145);
+
     if (FAILED(InitWindow(hInstance, nCmdShow)))
 	{
         return E_FAIL;
@@ -128,6 +132,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\stone.dds", nullptr, &_pTextureRV);
 	CreateDDSTextureFromFile(_pd3dDevice, L"Resources\\floor.dds", nullptr, &_pGroundTextureRV);
+	CreateDDSTextureFromFile(_pd3dDevice, L"Textures\\football.dds", nullptr, &_pFootballRV);
 
     // Setup Camera
 	XMFLOAT3 eye = XMFLOAT3(0.0f, 2.0f, -1.0f);
@@ -168,34 +173,65 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	noSpecMaterial.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	noSpecMaterial.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	noSpecMaterial.specularPower = 0.0f;
-	
-	GameObject * gameObject = new GameObject("Floor", new Appearance(planeGeometry, noSpecMaterial));
-	gameObject->GetParticle()->SetMass(-1.0f);
 
-	gameObject->GetTransformation()->SetPositionXYZ(0.0f, 0.0f, 0.0f);
-	gameObject->GetTransformation()->SetScaleXYZ(15.0f, 15.0f, 15.0f);
-	gameObject->GetTransformation()->SetRotationXYZ(XMConvertToRadians(90.0f), 0.0f, 0.0f);
+	GameObject * floor = new GameObject("Floor", new Appearance(planeGeometry, noSpecMaterial));
 
-	gameObject->GetAppearance()->SetTextureRV(_pGroundTextureRV);
+	floor->GetTransformation()->SetPosition(0.0f, 0.0f, 0.0f);
+	floor->GetTransformation()->SetScale(20, 20, 20);
+	floor->GetTransformation()->SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
+	floor->GetParticle()->SetRadius(0.0f);
+	floor->GetParticle()->SetMass(-1.0f);
 
-	_gameObjects.push_back(gameObject);
+	floor->GetAppearance()->SetTextureRV(_pGroundTextureRV);
 
-	for (auto i = 0; i < 5; i++)
+	particleSystem = new ParticleSystem(floor);
+
+	for (int i = 0; i < numOfObjects; i++)
 	{
-		gameObject = new GameObject("Cube " + i, new Appearance(cubeGeometry, shinyMaterial));
+		GameObject* cube = new GameObject("Cube " + std::to_string(i + 1), new Appearance(cubeGeometry, shinyMaterial));
 
-		gameObject->GetTransformation()->SetScaleXYZ(0.5f, 0.5f, 0.5f);
+		cube->GetTransformation()->SetScale(0.5f, 0.5f, 0.5f);
+
 		if (i % 2 != 0)
 		{
-			gameObject->GetParticle()->UseConstAcceleration(true);
+			cube->GetParticle()->SwitchLaminarOn(false);
 		}
-		gameObject->GetTransformation()->SetPositionXYZ(-4.0f + (i * 2.0f), 0.5f, 10.0f);
-		gameObject->GetAppearance()->SetTextureRV(_pTextureRV);
 
-		_gameObjects.push_back(gameObject);
+		cube->GetTransformation()->SetPosition(-9.0f + (i * 2.0f), 7.0f, 10.0f);
+		cube->GetParticle()->SetRadius(0.5f);
+		cube->GetParticle()->SetMass(20.0f);
+		
+		if (i == 0)
+		{
+			//cube->GetParticle()->SetMass(10.0f);
+			cube->GetAppearance()->SetTextureRV(_pFootballRV);
+		}
+		else
+		{
+			cube->GetAppearance()->SetTextureRV(_pTextureRV);
+		}
+
+		if (i > 5)
+		{
+			cube->GetParticle()->IsKillableOn(true);
+			cube->GetTransformation()->SetPosition(rand() % (int)floor->GetTransformation()->GetScale().x, rand() % 100, rand() % (int)floor->GetTransformation()->GetScale().z);
+			cube->GetParticle()->SetCoefficientOfRestitution(1);
+		}
+
+		particleSystem->AddParticle(cube);
 	}
 
-	currentObject = 1;
+	gravity = new GravityGenerator();
+	lamDrag = new LaminarDragGenerator();
+	turbDrag = new TurbulentDragGenerator();
+
+	gravity->SetGravity(Vector3D(0.0f, -9.81, 0.0f));
+
+	particleSystem->AddGenerator(gravity);
+	particleSystem->AddGenerator(lamDrag);
+	particleSystem->AddGenerator(turbDrag);
+
+	ControllerManager::Instance()->init(particleSystem);
 
 	return S_OK;
 }
@@ -254,7 +290,7 @@ HRESULT Application::InitShadersAndInputLayout()
 
     // Create the input layout
 	hr = _pd3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
-                                        pVSBlob->GetBufferSize(), &_pVertexLayout);
+                                         pVSBlob->GetBufferSize(), &_pVertexLayout);
 	pVSBlob->Release();
 
 	if (FAILED(hr))
@@ -674,39 +710,42 @@ void Application::Cleanup()
 		_camera = nullptr;
 	}
 
-	for (auto gameObject : _gameObjects)
+	if (particleSystem)
 	{
-		if (gameObject)
-		{
-			delete gameObject;
-			gameObject = nullptr;
-		}
+		delete particleSystem;
+		particleSystem = nullptr;
 	}
 }
 
 void Application::Update()
 {
     // Update our time
-    static float elapsedTime = 0.0f;
-    static DWORD dwTimeStart = 0;
+    static float elapsedTime = 0.0166667;
 
-    DWORD dwTimeCur = GetTickCount();
+	UpdateCamera(); // Updates camera
 
-    if (dwTimeStart == 0)
-        dwTimeStart = dwTimeCur;
-
-	elapsedTime = (dwTimeCur - dwTimeStart) / 1000.0f;
-
-	UpdateCamera();
-
-	// Update objects
-	for (auto gameObject : _gameObjects)
+	ControllerManager::Instance()->Update();  // Checks for collisions between all particles
+	
+	particleSystem->Update(elapsedTime); // Update particle system
+	
+	for (auto gameObject : particleSystem->GetGameObject())
 	{
-		gameObject->Update(elapsedTime);
-	}
+			for (auto gameObject2 : particleSystem->GetGameObject())
+			{
+				CollisionsManager::Instance()->Update(gameObject, gameObject2);
+			}
 
-	// Updates object's position
-	_gameObjects[currentObject]->GetParticle()->Update(elapsedTime);
+		// Loops particles around the game board
+		if (gameObject->GetTransformation()->GetPosition().z > particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().z)
+			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, -particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().z + 0.05));
+		else if (gameObject->GetTransformation()->GetPosition().z < -particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().z)
+			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().z - 0.05));
+
+		if (gameObject->GetTransformation()->GetPosition().x > particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().x)
+			gameObject->GetTransformation()->SetPosition(Vector3D(-particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().x + 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+		else if (gameObject->GetTransformation()->GetPosition().x < -particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().x)
+			gameObject->GetTransformation()->SetPosition(Vector3D(particleSystem->GetGameObject()[0]->GetTransformation()->GetScale().x - 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+	}
 }
 
 void Application::UpdateCamera()
@@ -762,7 +801,7 @@ void Application::Draw()
 	cb.EyePosW = _camera->GetPosition();
 
 	// Render all scene objects
-	for (auto gameObject : _gameObjects)
+	for (auto gameObject : particleSystem->GetGameObject())
 	{
 		// Get render material
 		Material material = gameObject->GetAppearance()->GetMaterial();
@@ -773,7 +812,7 @@ void Application::Draw()
 		cb.surface.SpecularMtrl = material.specular;
 
 		// Set world matrix
-		cb.World = XMMatrixTranspose(gameObject->GetWorldMatrix());
+		cb.World = XMMatrixTranspose(gameObject->GetTransformation()->GetWorldMatrix());
 
 		// Set texture
 		if (gameObject->GetAppearance()->HasTexture())

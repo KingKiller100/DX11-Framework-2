@@ -16,12 +16,11 @@ Vector3D::Vector3D()
 
 Vector3D::~Vector3D()
 {
-//	delete this;
 }
 
 float Vector3D::GetMagnitude(const Vector3D v)
 {
-	return sqrtf((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+	return sqrtf(powf(v.x, 2) + powf(v.y, 2) + pow(v.z, 2));
 }
 
 float Vector3D::DotProduct(const Vector3D v, const Vector3D u)
@@ -29,22 +28,21 @@ float Vector3D::DotProduct(const Vector3D v, const Vector3D u)
 	return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
 }
 
-float Vector3D::AngleBetweenV3D(const Vector3D v, const Vector3D u, bool isRadians)
+float Vector3D::AngleBetweenV3D(const Vector3D v, const Vector3D u, bool inRadians)
 {
 	float angle = DotProduct(v, u);
 	angle /= (GetMagnitude(v) * GetMagnitude(u));
+	
+	//const float pi = 2 * acosf(0.0f);
+	const float toRadians = M_PI / 180;
 
-	const float pi = 2 * acosf(0.0f);
-	const float toRadians = pi / 180;
-	if (isRadians == true)
+	if (inRadians)
 	{
-		//Converts angle to radians then creates 
+		//Converts angle to radians 
 		return angle = acosf(angle) * toRadians;
 	}
-	else
-	{
-		return angle = acosf(angle);
-	}
+		
+	return angle = acosf(angle);
 }
 
 Vector3D Vector3D::CrossProduct(const Vector3D& u, const Vector3D& v)
@@ -54,11 +52,47 @@ Vector3D Vector3D::CrossProduct(const Vector3D& u, const Vector3D& v)
 		u.x * v.y - u.y * v.x);
 }
 
-void Vector3D::Normalize()
+Vector3D Vector3D::Normalize(Vector3D v)
 {
-	float mag = GetMagnitude(Vector3D(this->x, this->y, this->z));
+	float mag = GetMagnitude(v);
 
-	this->x = this->x / mag;
-	this->y = this->y / mag;
-	this->z = this->z / mag;
+	if (mag == 0)
+	{
+		return v;
+	}
+
+	v /= mag;
+
+	return v;
+}
+
+void Vector3D::Zero()
+{
+	x = y = z = 0;
+}
+
+void Vector3D::Truncate(float max)
+{
+	if (fabsf(GetMagnitude(*this)) > max)
+	{
+		*this = Normalize(*this) * max;
+	}
+}
+
+Vector3D Vector3D::ReverseVector()
+{
+	Vector3D vec = *this;
+
+	return vec * -1;
+}
+
+float Vector3D::Distance(const Vector3D & v)
+{
+	/*float xSeperation = v.x - x;
+	float ySeperation = v.y - y;
+	float zSeperation = v.z - z;*/
+
+	Vector3D vecSeperation = v - (*this);
+
+	return GetMagnitude(vecSeperation);
 }
