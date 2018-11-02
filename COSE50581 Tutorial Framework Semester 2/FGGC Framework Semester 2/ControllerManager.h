@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleSystem.h"
+#include "ParticleManager.h"
 
 class ControllerManager
 {
@@ -10,26 +10,31 @@ private:
 	char moveBackward;
 	char moveRight;
 	char moveLeft;
+	char fly;
+	char jump;
 
-	//vector<GameObject*> gameObjects;
-	ParticleSystem* ps;
+	ParticleManager* ps;
 	int currentObject;
 
 private:
 	ControllerManager();
+
 public:
 	~ControllerManager();
 
 	static ControllerManager* Instance();
-	void init(ParticleSystem* p);
+	void init(ParticleManager* p);
 
 	void Update();
 
 	// Movement Accessor Methiods
-	void SetForwardButton(const char f)					{ moveForward = f; }
-	void SetBackwardButton(const char b)				{ moveForward = b; }
-	void SetRightButton(const char r)					{ moveForward = r; }
-	void SetLeftButton(const char l)					{ moveForward = l; }
+	void SetForwardButton(const char &f)				{ moveForward = f; }
+	void SetBackwardButton(const char &b)				{ moveBackward = b; }
+	void SetRightButton(const char &r)					{ moveRight = r; }
+	void SetLeftButton(const char &l)					{ moveLeft = l; }
+	void SetFlyButton(const char &f)					{ fly = f; }
+	void SetJumpButton(const char &j)					{ jump = j; }
+
 
 	// CO Accessor Methods
 	void SetCurrentObject(const int co)					{ currentObject = co; }

@@ -47,9 +47,6 @@
     <ClInclude Include="GravityGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ForceGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,6 +66,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ControllerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="ParticleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,6 +122,7 @@
     <ClCompile Include="ControllerManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QuadTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

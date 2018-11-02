@@ -1,8 +1,7 @@
 #include "GameObject.h"
 
-GameObject::GameObject(string type, Appearance* appearance) : _type(type)
+GameObject::GameObject(string type, Appearance* appearance) : _type(type), _appearance(appearance)
 {
-	_appearance = appearance;
 	_transform = new Transformation();
 	_particle = new Particle(_transform);
 }

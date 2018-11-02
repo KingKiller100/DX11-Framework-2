@@ -88,21 +88,22 @@ bool CollisionsManager::CheckBoundingBox(GameObject * go1, GameObject * go2)
 bool CollisionsManager::CheckBoundingPlane(GameObject * go1, GameObject * go2)
 {
 	// Store plane data as if it's a 2D shape - only using x and y axis
-	float aMaxX = go1->GetTransformation()->GetPosition().x + go1->GetTransformation()->GetScale().x;
-	float aMinX = go1->GetTransformation()->GetPosition().x - go1->GetTransformation()->GetScale().x;
-	float aMaxY = go1->GetTransformation()->GetPosition().y;
-	float aMaxZ = go1->GetTransformation()->GetPosition().z + go1->GetTransformation()->GetScale().z;
-	float aMinZ = go1->GetTransformation()->GetPosition().z - go1->GetTransformation()->GetScale().z;
+	float planeMaxX = go2->GetTransformation()->GetPosition().x + go2->GetTransformation()->GetScale().x;
+	float planeMinX = go2->GetTransformation()->GetPosition().x - go2->GetTransformation()->GetScale().x;
+	float planeMaxY = go2->GetTransformation()->GetPosition().y;
+	float planeMaxZ = go2->GetTransformation()->GetPosition().z + go2->GetTransformation()->GetScale().z;
+	float planeMinZ = go2->GetTransformation()->GetPosition().z - go2->GetTransformation()->GetScale().z;
 
-	float bMaxX = go2->GetTransformation()->GetPosition().x + go2->GetParticle()->GetRadius();
-	float bMinX = go2->GetTransformation()->GetPosition().x - go2->GetParticle()->GetRadius();
-	float bMinY = go2->GetTransformation()->GetPosition().y - go2->GetParticle()->GetRadius();
-	float bMaxZ = go2->GetTransformation()->GetPosition().z + go2->GetParticle()->GetRadius();
-	float bMinZ = go2->GetTransformation()->GetPosition().z - go2->GetParticle()->GetRadius();
 
-	return (aMinX <= bMaxX && aMaxX >= bMinX) && 
-		(bMinY <= aMaxY) && 
-		(aMinZ <= bMaxZ && aMaxZ >= bMinZ);
+	float objectMaxX = go1->GetTransformation()->GetPosition().x + go1->GetParticle()->GetRadius();
+	float objectMinX = go1->GetTransformation()->GetPosition().x - go1->GetParticle()->GetRadius();
+	float objectMinY = go1->GetTransformation()->GetPosition().y - go1->GetParticle()->GetRadius();
+	float objectMaxZ = go1->GetTransformation()->GetPosition().z + go1->GetParticle()->GetRadius();
+	float objectMinZ = go1->GetTransformation()->GetPosition().z - go1->GetParticle()->GetRadius();
+
+	return (planeMinX <= objectMaxX && planeMaxX >= objectMinX) && 
+		(objectMinY <= planeMaxY) && 
+		(planeMinZ <= objectMaxZ && planeMaxZ >= objectMinZ);
 }
 
 void CollisionsManager::Seperation(GameObject * go1, GameObject* go2)
@@ -129,6 +130,7 @@ void CollisionsManager::ResolveCollision(GameObject* go1, GameObject* go2)
 	float e = go1->GetParticle()->GetCoefficientOfRestitution() + go2->GetParticle()->GetCoefficientOfRestitution() / 2;
 
 	Vector3D firstRest = go1->GetParticle()->GetVelocity() * (go1->GetParticle()->GetMass() - (go2->GetParticle()->GetMass() * e));
+	
 	//Vector3D secondRest = go2->GetParticle()->GetVelocity() * (go2->GetParticle()->GetMass() - (go1->GetParticle()->GetMass() * e));
 	Vector3D secondRest = go2->GetParticle()->GetVelocity() * (go2->GetParticle()->GetMass() * (1.0f + e));
 
@@ -158,15 +160,17 @@ void CollisionsManager::ResolveCollision(GameObject* go1, GameObject* go2)
 
 void CollisionsManager::Update(GameObject * go1, GameObject * go2)
 {
-	if (go1->GetType() != go2->GetType())
-		if (CheckBoundingSphere(go1, go2))
+	if (go1->GetType() == go2->GetType())
+		return;
+		
+	if (CheckBoundingSphere(go1, go2))
 			Seperation(go1, go2);
 
-	if (go1->GetType() == "Floor" && go1->GetType() != go2->GetType())
+	if (go2->GetType() == "Floor")
 		if (CheckBoundingPlane(go1, go2))
 		{
-			go2->GetParticle()->SetVelocity(Vector3D(go2->GetParticle()->GetVelocity().x, go2->GetParticle()->GetVelocity().y * -0.75f, go2->GetParticle()->GetVelocity().z));
-			if (go2->GetParticle()->GetVelocity().y < 0.2f)
-				go2->GetTransformation()->SetPosition(Vector3D(go2->GetTransformation()->GetPosition().x, go1->GetTransformation()->GetPosition().y + go2->GetParticle()->GetRadius(), go2->GetTransformation()->GetPosition().z));
+			go1->GetParticle()->SetVelocity(Vector3D(go1->GetParticle()->GetVelocity().x, go1->GetParticle()->GetVelocity().y * -0.75f, go1->GetParticle()->GetVelocity().z));
+			if (go1->GetParticle()->GetVelocity().y < 0.2f)
+				go1->GetTransformation()->SetPosition(Vector3D(go1->GetTransformation()->GetPosition().x, go2->GetTransformation()->GetPosition().y + go1->GetParticle()->GetRadius(), go1->GetTransformation()->GetPosition().z));
 		}
 }

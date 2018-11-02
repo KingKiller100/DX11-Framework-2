@@ -14,11 +14,12 @@
 #include "Vector3D.h"
 #include "ControllerManager.h"
 #include "CollisionsManager.h"
-#include "ParticleSystem.h"
+#include "ParticleManager.h"
 #include "Appearance.h"
 #include "Particle.h"
 #include "Transformation.h"
 #include "GameObject.h"
+#include "QuadTree.h"
 
 using namespace DirectX;
 
@@ -104,12 +105,14 @@ private:
 	float _cameraSpeed = 2.0f;
 
 	// Number of particles created
-	const int numOfObjects = 50;
+	const int numOfObjects = 10;
 
 	UINT _WindowHeight;
 	UINT _WindowWidth;
 
-	ParticleSystem* particleSystem;
+	QuadTree *quad;
+
+	ParticleManager* particleSystem;
 //	vector<GameObject *> _gameObjects;
 	GravityGenerator* gravity;
 	LaminarDragGenerator* lamDrag;

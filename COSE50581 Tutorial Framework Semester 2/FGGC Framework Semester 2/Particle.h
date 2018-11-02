@@ -43,6 +43,7 @@ public:
 	// Radius Accessor Methods
 	void SetRadius(float r)											{ _radius = fabsf(r); }
 	float GetRadius()												const { return _radius; }
+	float GetDiameter()												const { return GetRadius() * 2; }
 
 	// Velocity Accessor Methods
 	void SetVelocity(Vector3D v)									{ _velocity = v; }

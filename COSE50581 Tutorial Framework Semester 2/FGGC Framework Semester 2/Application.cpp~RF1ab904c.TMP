@@ -187,8 +187,8 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	Vector3D floorPos = floor->GetTransformation()->GetPosition();
 	Vector3D adjustedFloorScale = Vector3D(floor->GetTransformation()->GetScale().x, 0.f, floor->GetTransformation()->GetScale().z);
 
-	quad = new QuadTree(0, new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale * 2.f));
-	particleSystem = new ParticleManager(floor);
+	quad = new QuadTree(0, new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale));
+	particleSystem = new ParticleSystem(floor);
 
 	for (int i = 0; i < numOfObjects; i++)
 	{
@@ -201,7 +201,7 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 			cube->GetParticle()->SwitchLaminarOn(false);
 		}
 
-		cube->GetTransformation()->SetPosition(-9.0f + (i * 2.0f), 0.50f, 6.7f);
+		cube->GetTransformation()->SetPosition(-9.0f + (i * 2.0f), 17.0f, 10.0f);
 		cube->GetParticle()->SetRadius(0.5f);
 		cube->GetParticle()->SetMass(20.0f);
 		
@@ -730,14 +730,15 @@ void Application::Update()
 
 	UpdateCamera(); // Updates camera
 
-	ControllerManager::Instance()->Update();  // Checks for controller input
+	ControllerManager::Instance()->Update();  // Checks for collisions between all particles
 	
 	particleSystem->Update(elapsedTime); // Update particle system
 
 	quad->Clear();
 	for (auto gameObject : particleSystem->GetGameObjectList())
 	{
-		quad->Insert(gameObject);
+		if (gameObject->GetType() != "floor")
+			quad->Insert(gameObject);
 	}
 
 	vector<GameObject*> returnList;
@@ -746,10 +747,10 @@ void Application::Update()
 	{
 		returnList.clear();
 		quad->retrieve(returnList, gameObject);
-	
-/*
+	}
+
 	for (auto gameObject : returnList)
-	{*/
+	{
 		for (auto gameObject2 : returnList)
 		{
 			CollisionsManager::Instance()->Update(gameObject, gameObject2);

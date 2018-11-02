@@ -14,10 +14,10 @@ using namespace std;
 class GameObject
 {
 private:
+	string _type;
 	Transformation* _transform;
 	Particle* _particle;
 	Appearance* _appearance;
-	string _type;
 
 public:
 	GameObject(string type, Appearance* appearance);
