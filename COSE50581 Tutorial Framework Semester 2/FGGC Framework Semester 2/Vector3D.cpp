@@ -1,10 +1,10 @@
 #include "Vector3D.h"
 
-Vector3D::Vector3D(float x, float y, float z)
+Vector3D::Vector3D(const float x, const float y, const float z) : x(x), y(y), z(z) {/*Empty*/}
+
+Vector3D::Vector3D(const float &f)
 {
-	this->x = x;
-	this->y = y;
-	this->z = z;
+	x = y = z = f;
 }
 
 Vector3D::Vector3D()

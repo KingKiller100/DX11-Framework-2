@@ -21,6 +21,8 @@ struct Quadrant
 		position = scale = Vector3D();
 	}
 
+	Quadrant(const float xVal, const float zVal, const float w, const float h) : position(Vector3D(xVal, 0, zVal)), scale(Vector3D(w, 0, h)) {/* Empty */ }
+
 	Quadrant(const Vector3D &p, const Vector3D &s) : position(p), scale(s)
 	{
 	}

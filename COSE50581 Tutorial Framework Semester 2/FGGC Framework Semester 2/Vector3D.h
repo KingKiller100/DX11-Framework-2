@@ -11,7 +11,8 @@ struct Vector3D
 
 	Vector3D();
 
-	Vector3D(float x, float y, float z);
+	Vector3D(const float x, const float y, const float z);
+	Vector3D(const float &f);
 
 	~Vector3D();
 

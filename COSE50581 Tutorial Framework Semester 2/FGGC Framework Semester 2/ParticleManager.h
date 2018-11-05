@@ -1,9 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Particle.h"
 #include "GravityGenerator.h"
-#include "LaminarDragGenerator.h"
-#include "TurbulentDragGenerator.h"
 #include <vector>
 
 class ParticleManager

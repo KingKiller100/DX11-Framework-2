@@ -20,6 +20,8 @@
 #include "Transformation.h"
 #include "GameObject.h"
 #include "QuadTree.h"
+#include "LaminarDragGenerator.h"
+#include "TurbulentDragGenerator.h"
 
 using namespace DirectX;
 
@@ -112,7 +114,7 @@ private:
 
 	QuadTree *quad;
 
-	ParticleManager* particleSystem;
+	ParticleManager* particleManager;
 //	vector<GameObject *> _gameObjects;
 	GravityGenerator* gravity;
 	LaminarDragGenerator* lamDrag;

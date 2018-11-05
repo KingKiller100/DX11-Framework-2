@@ -1,6 +1,6 @@
 #include "QuadTree.h"
 
-#define MAXOBJECTDENSITY 1
+#define MAXOBJECTDENSITY 0
 #define MAXLEVELS 10
 
 QuadTree::QuadTree(int lvl, Quadrant * b) : level(lvl), bounds(b)
@@ -13,7 +13,10 @@ QuadTree::QuadTree(int lvl, Quadrant * b) : level(lvl), bounds(b)
 
 QuadTree::~QuadTree()
 {
-	
+	delete bounds;
+
+	for (int i = 0; i < nodes.size(); i++)
+		delete nodes[i];	
 }
 
 void QuadTree::Clear()
@@ -36,7 +39,6 @@ void QuadTree::Subdivide()
 	Vector3D subScale = bounds->scale / 2.f;
 	Vector3D subPosition = bounds->position;
 
-	cout << level << endl;
 	CreateNE(subPosition, subScale);
 	CreateNW(subPosition, subScale);
 	CreateSW(subPosition, subScale);
@@ -45,26 +47,22 @@ void QuadTree::Subdivide()
 
 void QuadTree::CreateNE(const Vector3D& subPosition, const Vector3D& subScale)
 {
-	if (!nodes[NORTHEAST])
-		nodes[NORTHEAST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x, subPosition.y, subPosition.z + subScale.z), subScale));
+	nodes[NORTHEAST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x, subPosition.y, subPosition.z + subScale.z), subScale));
 }
 
 void QuadTree::CreateNW(const Vector3D& subPosition, const Vector3D& subScale)
 {
-	if (!nodes[NORTHWEST])
-		nodes[NORTHWEST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x, subPosition.y, subPosition.z), subScale));
+	nodes[NORTHWEST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x, subPosition.y, subPosition.z), subScale));
 }
 
 void QuadTree::CreateSW(const Vector3D& subPosition, const Vector3D& subScale)
 {
-	if (!nodes[SOUTHWEST])
-		nodes[SOUTHWEST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x + subScale.x, subPosition.y, subPosition.z), subScale));
+	nodes[SOUTHWEST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x + subScale.x, subPosition.y, subPosition.z), subScale));
 }
 
 void QuadTree::CreateSE(const Vector3D& subPosition, const Vector3D& subScale)
 {
-	if (!nodes[SOUTHEAST])
-		nodes[SOUTHEAST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x + subScale.x, subPosition.y, subPosition.z + subScale.z), subScale));
+	nodes[SOUTHEAST] = new QuadTree(level+1, new Quadrant(Vector3D(subPosition.x + subScale.x, subPosition.y, subPosition.z + subScale.z), subScale));
 }
 
 
@@ -107,69 +105,29 @@ int QuadTree::GetIndex(GameObject *g)
 
 void QuadTree::Insert(GameObject *g)
 {
-	if (nodes[0] != nullptr)
-	{
-		const int index = GetIndex(g);
+	int index = GetIndex(g);
 
-		if (index != -1)
-		{
-			if (!nodes[index])
+	if (index != -1)
+		if (nodes[index] != nullptr)		
+			if (level < MAXLEVELS)
 			{
-				switch (index)
-				{
-				case NORTHEAST:
-					CreateNE(bounds->position, bounds->scale / 2.f);
-					break;
-				case NORTHWEST:
-					CreateNW(bounds->position, bounds->scale / 2.f);
-					break;
-				case SOUTHWEST:
-					CreateSW(bounds->position, bounds->scale / 2.f);
-					break;
-				case SOUTHEAST:
-					CreateSE(bounds->position, bounds->scale / 2.f);
-					break;
-				default:
-					NULL;
-					break;
-				}
+				nodes[index]->Insert(g);
+				return;
 			}
-			nodes[index]->Insert(g);
-			return;
-		}
-	}
-
+		
 	gameObjectList.push_back(g);
 
-	if (gameObjectList.size() > MAXOBJECTDENSITY && level < MAXLEVELS)
-		if (!nodes[0])
-			Subdivide();
-
-	for (int i = 0; i < gameObjectList.size(); i++)
-	{
-		const int index = GetIndex(gameObjectList.at(i));
-
-		if (index != -1)
-		{
+	if (index != -1)
+		if (gameObjectList.size() > MAXOBJECTDENSITY && level < MAXLEVELS)
 			if (!nodes[index])
-			{
-				switch (index)
-				{
-				case NORTHEAST:
-					CreateNE(bounds->position, bounds->scale / 2.f);
-					break;
-				case NORTHWEST:
-					CreateNW(bounds->position, bounds->scale / 2.f);
-					break;
-				case SOUTHWEST:
-					CreateSW(bounds->position, bounds->scale / 2.f);
-					break;
-				case SOUTHEAST:
-					CreateSE(bounds->position, bounds->scale / 2.f);
-					break;
-				}
-			}
+				Subdivide();
 
+	for (auto i = 0; i < gameObjectList.size(); i++)
+	{
+		index = GetIndex(gameObjectList.at(i));
+
+		if (index != -1 && level < MAXLEVELS)
+		{
 			nodes[index]->Insert(gameObjectList.at(i));
 			gameObjectList.erase(gameObjectList.begin() + i);
 		}
@@ -181,8 +139,7 @@ void QuadTree::retrieve(vector<GameObject*> &returnList, GameObject* g)
 {	
 	const int index = GetIndex(g);
 	
-	if (index != -1)
-		if (nodes[index] != nullptr)
+	if (index != -1 && nodes[index] != nullptr)
 			nodes[index]->retrieve(returnList, g);
 
 	for (GameObject* object : gameObjectList)

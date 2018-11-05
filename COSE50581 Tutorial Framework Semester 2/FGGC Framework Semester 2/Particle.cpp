@@ -1,14 +1,17 @@
 #include "Particle.h"
+#include <random>
 
-Particle::Particle(Transformation * transform)
+Particle::Particle(Transformation * transform) : _transform(transform)
 {
-	_transform = transform;
-	
+	std::random_device rd;
+	std::default_random_engine generator(rd());
+	std::uniform_real_distribution<float> distribution(0.001, 1);
+
 	generalFriction = 0.98f;
 	_radius = 0.5f;
 	_mass = 1.0f;
 
-	coefficientOfRestitution = 0.5462f;
+	coefficientOfRestitution = distribution(generator);
 
 	_velocity = Vector3D();
 	_acceleration = Vector3D();
@@ -39,7 +42,7 @@ void Particle::Update(float t)
 	lifeTimer += t;  
 }
 
-void Particle::AddForce(Vector3D &f)
+void Particle::AddForce(const Vector3D &f)
 {
 	netForce += f;
 }
