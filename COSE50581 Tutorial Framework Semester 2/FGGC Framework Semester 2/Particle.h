@@ -28,10 +28,10 @@ private:
 	bool isKillable;
 
 private:
-	void UpdateNetForce(float t);
+	void UpdateNetForce(float &t);
 	void UpdateAccel();
-	void MoveParticle(float t);
-	void UpdateVelocity(float t);
+	void MoveParticle(float &t);
+	void UpdateVelocity(float &t);
 
 public:
 	Particle(Transformation* _transform);
@@ -89,6 +89,6 @@ public:
 	void AddForce(const Vector3D& f);
 	void AddGenerator(ForceGenerator* fg);
 
-	void Update(const float t);
+	void Update(float& t);
 };
 

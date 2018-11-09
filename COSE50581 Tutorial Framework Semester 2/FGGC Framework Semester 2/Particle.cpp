@@ -27,7 +27,7 @@ Particle::~Particle()
 {
 }
 
-void Particle::Update(float t)
+void Particle::Update(float& t)
 {
 	if (_mass < 0)
 		return;
@@ -52,7 +52,7 @@ void Particle::AddGenerator(ForceGenerator* fg)
 	_forceGenerators.push_back(fg);
 }
 
-void Particle::UpdateNetForce(float t)
+void Particle::UpdateNetForce(float &t)
 {
 	for (ForceGenerator* fg : _forceGenerators)
 	{
@@ -60,16 +60,14 @@ void Particle::UpdateNetForce(float t)
 	}
 }
 
-void Particle::MoveParticle(float t)
+void Particle::MoveParticle(float &t)
 {
-	Vector3D pos = _transform->GetPosition();
-	
+	Vector3D pos = _transform->GetPosition();	
 	pos += _velocity * t + _acceleration * t * t * 0.5f;
-	
 	_transform->SetPosition(pos);
 }
 
-void Particle::UpdateVelocity(float t)
+void Particle::UpdateVelocity(float &t)
 {
 	_velocity += _acceleration * t;
 	_velocity *= generalFriction;

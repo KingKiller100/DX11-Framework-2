@@ -59,7 +59,7 @@ void ParticleManager::AddGenerator(ForceGenerator* fg)
 {
 	for (GameObject* g : gameObjects)
 	{
-			g->GetParticle()->AddGenerator(fg);
+		g->GetParticle()->AddGenerator(fg);
 	}
 }
 
@@ -68,10 +68,7 @@ void ParticleManager::Update(float t)
 	for (GameObject* g : gameObjects)
 	{
 		g->Update(t);
-	}
 
-	for (GameObject* g : gameObjects)
-	{
 		if (g->GetParticle()->GetLifetimer() >= killTime && g->GetParticle()->GetIsKillable())
 		{
 			RepositionParticle(g);

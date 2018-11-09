@@ -169,8 +169,8 @@ void CollisionsManager::Update(GameObject * go1, GameObject * go2)
 	if (go2->GetType() == "Floor")
 		if (CheckBoundingPlane(go1, go2))
 		{
-			go1->GetParticle()->SetVelocity(Vector3D(go1->GetParticle()->GetVelocity().x, go1->GetParticle()->GetVelocity().y * -0.75f, go1->GetParticle()->GetVelocity().z));
-			if (go1->GetParticle()->GetVelocity().y < 0.2f)
+			go1->GetParticle()->SetVelocity(Vector3D(go1->GetParticle()->GetVelocity().x, go1->GetParticle()->GetVelocity().y * -0.85f, go1->GetParticle()->GetVelocity().z));
+			if (go1->GetParticle()->GetVelocity().y < 0.002f)
 				go1->GetTransformation()->SetPosition(Vector3D(go1->GetTransformation()->GetPosition().x, go2->GetTransformation()->GetPosition().y + go1->GetParticle()->GetRadius(), go1->GetTransformation()->GetPosition().z));
 		}
 }
