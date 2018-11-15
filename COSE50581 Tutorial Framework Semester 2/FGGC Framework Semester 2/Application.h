@@ -112,10 +112,7 @@ private:
 	UINT _WindowHeight;
 	UINT _WindowWidth;
 
-	QuadTree *quad;
-
-	ParticleManager* particleManager;
-//	vector<GameObject *> _gameObjects;
+	ParticleManager* _particleManager;
 	GravityGenerator* gravity;
 	LaminarDragGenerator* lamDrag;
 	TurbulentDragGenerator* turbDrag;
