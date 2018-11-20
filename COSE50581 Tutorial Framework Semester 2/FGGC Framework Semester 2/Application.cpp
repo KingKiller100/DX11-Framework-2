@@ -181,13 +181,11 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	floor->GetTransformation()->SetRotation(XMConvertToRadians(90.0f), 0.0f, 0.0f);
 	floor->GetParticle()->SetRadius(0.0f);
 	floor->GetParticle()->SetMass(-1.0f);
+	floor->GetParticle()->SetCoefficientOfRestitution(0.0f);
 
 	floor->GetAppearance()->SetTextureRV(_pGroundTextureRV);
 
-	Vector3D floorPos = floor->GetTransformation()->GetPosition();
-	Vector3D adjustedFloorScale = Vector3D(floor->GetTransformation()->GetScale().x, 0.f, floor->GetTransformation()->GetScale().z);
-
-	_quad = new QuadTree(0, new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale * 2.f));
+	
 	_particleManager = new ParticleManager(floor);
 
 	for (int i = 0; i < numOfObjects; i++)
@@ -233,9 +231,13 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 	_particleManager->AddGenerator(lamDrag);
 	_particleManager->AddGenerator(turbDrag);
 
-	gravity->SetGravity(-15.1f);
+	particleManager->AddGenerator(gravity);
+	particleManager->AddGenerator(lamDrag);
+	particleManager->AddGenerator(turbDrag);
 
 	ControllerManager::Instance()->init(_particleManager);
+
+	ControllerManager::Instance()->init(particleManager);
 
 	return S_OK;
 }
@@ -719,12 +721,6 @@ void Application::Cleanup()
 		delete _particleManager;
 		_particleManager = nullptr;
 	}
-
-	if (_quad)
-	{
-		delete _quad;
-		_quad = nullptr;
-	}
 }
 
 void Application::Update()
@@ -738,10 +734,15 @@ void Application::Update()
 	
 	_particleManager->Update(elapsedTime); // Update particle system
 
-	_quad->Clear();
+	Vector3D floorPos = _particleManager->GetGameObjectList()[0]->GetTransformation()->GetPosition();
+	Vector3D adjustedFloorScale = Vector3D(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x, 0.f, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z);
+
+	QuadTree quad = QuadTree(0, new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale * 2.f));
+
+	quad.Clear();
 	for (auto gameObject : _particleManager->GetGameObjectList())
 	{
-		_quad->Insert(gameObject);
+		quad.Insert(gameObject);
 	}
 
 	vector<GameObject*> returnList;
@@ -749,7 +750,7 @@ void Application::Update()
 	for (auto gameObject : _particleManager->GetGameObjectList())
 	{
 		returnList.clear();
-		_quad->retrieve(returnList, gameObject);
+		quad.retrieve(returnList, gameObject);
 	
 		for (auto gameObject2 : returnList)
 		{
@@ -757,15 +758,15 @@ void Application::Update()
 		}
 
 		// Loops particles around the game board
-		if (gameObject->GetTransformation()->GetPosition().z > _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
-			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z + 0.05));
-		else if (gameObject->GetTransformation()->GetPosition().z < -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
-			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z - 0.05));
+		if (gameObject->GetTransformation()->GetPosition().z > particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
+			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, -particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z + 0.05));
+		else if (gameObject->GetTransformation()->GetPosition().z < -particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
+			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z - 0.05));
 
-		if (gameObject->GetTransformation()->GetPosition().x > _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
-			gameObject->GetTransformation()->SetPosition(Vector3D(-_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x + 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
-		else if (gameObject->GetTransformation()->GetPosition().x < -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
-			gameObject->GetTransformation()->SetPosition(Vector3D(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x - 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+		if (gameObject->GetTransformation()->GetPosition().x > particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
+			gameObject->GetTransformation()->SetPosition(Vector3D(-particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x + 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+		else if (gameObject->GetTransformation()->GetPosition().x < -particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
+			gameObject->GetTransformation()->SetPosition(Vector3D(particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x - 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
 	}
 }
 
