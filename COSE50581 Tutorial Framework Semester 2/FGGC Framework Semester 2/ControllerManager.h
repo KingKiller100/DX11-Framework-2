@@ -27,7 +27,7 @@ public:
 
 	void Update();
 
-	// Movement Accessor Methiods
+	// Movement Accessor Methods
 	void SetForwardButton(const char &f)				{ moveForward = f; }
 	void SetBackwardButton(const char &b)				{ moveBackward = b; }
 	void SetRightButton(const char &r)					{ moveRight = r; }
