@@ -7,13 +7,13 @@ public:
 	TurbulentDragGenerator();
 	~TurbulentDragGenerator();
 
-	void SetDragCoefficient(float dg)					{ dragCoefficient = dg; }
-	void SetWaterCurrent(Vector3D wc)					{ waterCurrentVel = wc; }
+	void SetDragCoefficient(const float dg)					{ dragCoefficient = dg; }
+	void SetWaterCurrent(const Vector3f &wc)					{ waterCurrentVel = wc; }
 
-	void Update(Particle* p, float deltaTime);
+	void Update(Particle* p);
 
 private:
 	float dragCoefficient;
-	Vector3D waterCurrentVel;
+	Vector3f waterCurrentVel;
 };
 

@@ -2,32 +2,28 @@
 #include "Particle.h"
 
 
-TurbulentDragGenerator::TurbulentDragGenerator()
+TurbulentDragGenerator::TurbulentDragGenerator() : dragCoefficient(.7f), waterCurrentVel(Vector3f(0, 0, 5.0f))
 {
-	dragCoefficient = 0.70f;
-	waterCurrentVel = Vector3D(0, 0, 5.0f);
 }
-
 
 TurbulentDragGenerator::~TurbulentDragGenerator()
-{
-}
+= default;
 
-void TurbulentDragGenerator::Update(Particle * p, float deltaTime)
+void TurbulentDragGenerator::Update(Particle* p)
 {
-	if (p->isLaminarOn() == false)
+	if (!p->isLaminarOn())
 	{
 		// Calculates magnitude of velocity
-		float _velMag = Vector3D::GetMagnitude(waterCurrentVel);
+		const float _velMag = Vector3f::Magnitude(waterCurrentVel);
 
 		// Calculates unit of vector of velocity
-		Vector3D _unitVel = Vector3D::Normalize(waterCurrentVel);
+		const Vector3f _unitVel = Vector3f::Normalize(waterCurrentVel);
 
 		// Calculates drag Magnitude
-		float dragMag = dragCoefficient * _velMag * _velMag;
+		const float dragMag = dragCoefficient * _velMag * _velMag;
 
 		// Calculate of x and y componenets of drag force
-		Vector3D dragForce = _unitVel * -dragMag;
+		const Vector3f dragForce = _unitVel * -dragMag;
 
 		p->AddForce(dragForce);
 	}

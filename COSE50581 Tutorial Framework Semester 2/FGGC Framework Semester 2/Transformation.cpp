@@ -1,17 +1,14 @@
 #include "Transformation.h"
 
-Transformation::Transformation()
+Transformation::Transformation() : _parent(nullptr)
 {
-	_parent = nullptr;
-
-	_position = Vector3D();
-	_rotation = Vector3D();
-	_scale = Vector3D(1.0f, 1.0f, 1.0f);
+	_position = Vector3f();
+	_rotation = Vector3f();
+	_scale = Vector3f(1.0f, 1.0f, 1.0f);
 }
 
 Transformation::~Transformation()
-{
-}
+= default;
 
 // Calculate world matrix
 XMMATRIX Transformation::GetTranslationMatrix()

@@ -1,21 +1,23 @@
 #include "LaminarDragGenerator.h"
-#include "Particle.h"`
+#include "Particle.h"
 
 
-LaminarDragGenerator::LaminarDragGenerator()
+LaminarDragGenerator::LaminarDragGenerator() : dragCoefficient(0.40f)
 {
 }
 
+LaminarDragGenerator::LaminarDragGenerator(const float dc) : dragCoefficient(dc)
+{
+}
 
 LaminarDragGenerator::~LaminarDragGenerator()
-{
-}
+= default;
 
-void LaminarDragGenerator::Update(Particle * p, float deltaTime)
+void LaminarDragGenerator::Update(Particle* p)
 {
 	if (p->isLaminarOn())
 	{
-		Vector3D dragForce = p->GetVelocity() * -dragCoefficient;
+		const Vector3f dragForce = p->GetVelocity() * -dragCoefficient;
 		p->AddForce(dragForce);
 	}
 }

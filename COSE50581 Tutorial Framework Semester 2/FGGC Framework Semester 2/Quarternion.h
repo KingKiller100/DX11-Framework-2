@@ -1,5 +1,4 @@
 #pragma once
-#include "Vector3D.h"
 /**
 * Holds a three degree of freedom orientation.
 *
@@ -18,10 +17,9 @@
 * orientation.
 */
 
-#include <float.h>
-#include <math.h>
+#include <cfloat>
 #include <directxmath.h>
-#include <d3d11_1.h>
+#include "Maths/kMaths.h"
 
 using namespace DirectX;
 
@@ -136,7 +134,7 @@ public:
 	*
 	* @param scale The amount of the vector to add.
 	*/
-	void addScaledVector(const Vector3D& vector, float scale)
+	void addScaledVector(const Vector3f& vector, float scale)
 	{
 		Quaternion q(0,
 			vector.x * scale,
@@ -149,14 +147,14 @@ public:
 		k += q.k * 0.5f;
 	}
 
-	void rotateByVector(const Vector3D& vector)
+	void rotateByVector(const Vector3f& vector)
 	{
 		Quaternion q(0, vector.x, vector.y, vector.z);
 		(*this) *= q;
 	}
 
 	// Converts Euler angles to quarternion angles
-	Quaternion EulerToQuaternions(float pitch, float roll, float yaw)
+	Quaternion EulerToQuaternions(float pitch, float roll, float yaw) const
 	{
 		float cYaw = cos(yaw * 0.5f);
 		float sYaw = sin(yaw * 0.5f);
@@ -180,7 +178,7 @@ public:
 * position and orientation.
 */
 static inline void CalculateTransformMatrix(XMMATRIX &transformMatrix,
-	const Vector3D &position,
+	const Vector3f &position,
 	const Quaternion &orientation)
 {
 	transformMatrix.r[0] = XMVectorSetX(transformMatrix.r[0], 1 - 2 * orientation.j*orientation.j -

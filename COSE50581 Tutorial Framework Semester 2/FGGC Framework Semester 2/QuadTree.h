@@ -13,23 +13,32 @@ enum Compass
 
 struct Quadrant
 {
-	Vector3D position;
-	Vector3D scale;
+	Vector3f position;
+	Vector3f scale;
 
 	Quadrant()
 	{
-		position = scale = Vector3D();
+		position = scale = Vector3f();
 	}
 
-	Quadrant(const float xVal, const float zVal, const float w, const float h) : position(Vector3D(xVal, 0, zVal)), scale(Vector3D(w, 0, h)) {/* Empty */ }
+	Quadrant(const float xVal, const float zVal, const float w = 100, const float h = 100) : position(Vector3f(xVal, 0, zVal)), scale(Vector3f(w, 0, h)) {/* Empty */ }
 
-	Quadrant(const Vector3D &p, const Vector3D &s) : position(p), scale(s)
+	Quadrant(const Vector3f &p, const Vector3f &s) : position(p), scale(s)
 	{
 	}
 };
 
 class QuadTree
 {
+public:
+	QuadTree(Quadrant *b, const unsigned lvl = 0);
+	~QuadTree();
+
+	void Clear();
+	void Insert(GameObject *g);
+
+	void retrieve(vector<GameObject*> &returnList, GameObject* g);
+
 private:
 	u_int level;
 	std::vector<GameObject*> gameObjectList;
@@ -40,17 +49,8 @@ private:
 	void Subdivide();
 	int GetIndex(GameObject *g);
 
-	void CreateNE(const Vector3D &subPosition, const Vector3D &subScale);
-	void CreateNW(const Vector3D &subPosition, const Vector3D &subScale);
-	void CreateSE(const Vector3D &subPosition, const Vector3D &subScale);
-	void CreateSW(const Vector3D &subPosition, const Vector3D &subScale);
-
-public:
-	QuadTree(int lvl, Quadrant *b);
-	~QuadTree();
-
-	void Clear();
-	void Insert(GameObject *g);
-
-	void retrieve(vector<GameObject*> &returnList, GameObject* g);
+	void CreateNE(const Vector3f &subPosition, const Vector3f &subScale);
+	void CreateNW(const Vector3f &subPosition, const Vector3f &subScale);
+	void CreateSE(const Vector3f &subPosition, const Vector3f &subScale);
+	void CreateSW(const Vector3f &subPosition, const Vector3f &subScale);
 };

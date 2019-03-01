@@ -2,17 +2,21 @@
 #include "Particle.h"
 
 
-GravityGenerator::GravityGenerator()
+GravityGenerator::GravityGenerator() : currentGravity(Vector3f(0, 9.81f, 0))
 {
-	gravity = Vector3D(0.0f, -9.81f, 0.0f);
+	realGravity = currentGravity;
+}
+
+GravityGenerator::GravityGenerator(const Vector3f &gravity) : currentGravity(gravity)
+{
+	realGravity = currentGravity;
 }
 
 
 GravityGenerator::~GravityGenerator()
-{
-}
+= default;
 
-void GravityGenerator::Update(Particle* p, float deltatime)
+void GravityGenerator::Update(Particle* p)
 {
-	p->AddForce(gravity * p->GetMass());
+	p->AddForce(currentGravity * p->GetMass());
 }

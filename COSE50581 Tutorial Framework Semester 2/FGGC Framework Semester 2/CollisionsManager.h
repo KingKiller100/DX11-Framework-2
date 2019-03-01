@@ -14,11 +14,11 @@ public:
 
 	static CollisionsManager* Instance();
 
-	bool CheckBoundingSphere(GameObject* go1, GameObject* go2);
+	bool CheckBoundingSphere(GameObject* go1, GameObject* go2) const;
 	bool CheckBoundingBox(GameObject* go1, GameObject* go2);
-	bool CheckBoundingPlane(GameObject* go1, GameObject* go2);
+	bool CheckBoundingPlane(GameObject* go1, GameObject* go2) const;
 
-	void Seperation(GameObject* go1, GameObject* go2);
+	void Separation(GameObject* go1, GameObject* go2);
 	void ResolveCollision(GameObject* go1, GameObject* go2);
 
 	void Update(GameObject * go1, GameObject * go2);

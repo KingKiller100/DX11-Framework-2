@@ -1,7 +1,7 @@
 #pragma once
 #include "ParticleManager.h"
 
-class ControllerManager
+class ControllerManager final
 {
 private:
 	static ControllerManager* mInstance;

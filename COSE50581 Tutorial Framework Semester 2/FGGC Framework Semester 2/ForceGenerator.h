@@ -1,11 +1,12 @@
 #pragma once
-#include "Vector3D.h"
+#include "Maths/kMaths.h"
 
 class Particle;
 
 class ForceGenerator
 {
 public:
-	virtual void Update(Particle* p, float deltaTime) = 0;
+	virtual ~ForceGenerator() = 0;
+	virtual void Update(Particle* p) = 0;
 };
 

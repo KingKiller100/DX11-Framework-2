@@ -1,18 +1,24 @@
 #pragma once
 
 #include "ForceGenerator.h"
-class GravityGenerator : public ForceGenerator
+class GravityGenerator final : public ForceGenerator
 {
 public:
 	GravityGenerator();
+	GravityGenerator(const Vector3f &gravity);
 	~GravityGenerator();
 
-	void SetGravity(const Vector3D &g)									{ gravity = g; }
-	void SetGravity(const float &f)										{ gravity = Vector3D(0.f, f, 0.0f); }
+	float GetGravity() const											{ return currentGravity.y; }
+	void SetGravity(const Vector3f &g)									{ currentGravity = realGravity = g; }
+	void SetGravity(const float &f)										{ currentGravity = realGravity = Vector3f(0.f, f, 0.0f); }
 
-	void Update(Particle* p, float deltaTime);
+	void KillGravity()													{ currentGravity = 0.f; }
+	void RestartGravity()												{ currentGravity = realGravity; }
+
+	void Update(Particle* p) override;
 
 private:
-	Vector3D gravity;
+	Vector3f currentGravity;
+	Vector3f realGravity;
 };
 

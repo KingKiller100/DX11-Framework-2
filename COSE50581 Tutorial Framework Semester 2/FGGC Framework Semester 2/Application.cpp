@@ -1,5 +1,6 @@
 #include "Application.h"
 #include <ctime>
+#include "Clock.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -726,7 +727,8 @@ void Application::Cleanup()
 void Application::Update()
 {
     // Update our time
-    static float elapsedTime = 0.0166667;
+    static float elapsedTime = Clock<>::GetElapsedTime();
+	elapsedTime = elapsedTime > 0.016666667 ? 1.f / 60.f : elapsedTime;
 
 	UpdateCamera(); // Updates camera
 
@@ -734,10 +736,10 @@ void Application::Update()
 	
 	_particleManager->Update(elapsedTime); // Update particle system
 
-	Vector3D floorPos = _particleManager->GetGameObjectList()[0]->GetTransformation()->GetPosition();
-	Vector3D adjustedFloorScale = Vector3D(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x, 0.f, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z);
-
-	QuadTree quad = QuadTree(0, new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale * 2.f));
+	Vector3f floorPos = _particleManager->GetGameObjectList()[0]->GetTransformation()->GetPosition();
+	Vector3f adjustedFloorScale = Vector3f(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x, 0.f, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z);
+		   
+	QuadTree quad = QuadTree(new Quadrant(floorPos - adjustedFloorScale, adjustedFloorScale));
 
 	quad.Clear();
 	for (auto gameObject : _particleManager->GetGameObjectList())
@@ -759,23 +761,23 @@ void Application::Update()
 
 		// Loops particles around the game board
 		if (gameObject->GetTransformation()->GetPosition().z > _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
-			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z + 0.05));
+			gameObject->GetTransformation()->SetPosition(Vector3f(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z + 0.05));
 		else if (gameObject->GetTransformation()->GetPosition().z < -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z)
-			gameObject->GetTransformation()->SetPosition(Vector3D(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z - 0.05));
+			gameObject->GetTransformation()->SetPosition(Vector3f(gameObject->GetTransformation()->GetPosition().x, gameObject->GetTransformation()->GetPosition().y, _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().z - 0.05));
 
 		if (gameObject->GetTransformation()->GetPosition().x > _particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
-			gameObject->GetTransformation()->SetPosition(Vector3D(-_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x + 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+			gameObject->GetTransformation()->SetPosition(Vector3f(-_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x + 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
 		else if (gameObject->GetTransformation()->GetPosition().x < -_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x)
-			gameObject->GetTransformation()->SetPosition(Vector3D(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x - 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
+			gameObject->GetTransformation()->SetPosition(Vector3f(_particleManager->GetGameObjectList()[0]->GetTransformation()->GetScale().x - 0.05, gameObject->GetTransformation()->GetPosition().y, gameObject->GetTransformation()->GetPosition().z));
 	}
 }
 
 void Application::UpdateCamera()
 {
-	float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleXZ);
+	const float angleAroundZ = XMConvertToRadians(_cameraOrbitAngleXZ);
 
-	float x = _cameraOrbitRadius * cos(angleAroundZ);
-	float z = _cameraOrbitRadius * sin(angleAroundZ);
+	const float x = _cameraOrbitRadius * cos(angleAroundZ);
+	const float z = _cameraOrbitRadius * sin(angleAroundZ);
 
 	XMFLOAT3 cameraPos = _camera->GetPosition();
 	cameraPos.x = x;

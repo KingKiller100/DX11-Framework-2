@@ -49,17 +49,9 @@ void ParticleManager::RepositionParticle(GameObject* g)
 		if (g->GetType() == gameObjects[i]->GetType())
 		{
 			g->GetTransformation()->SetPosition(originalPos[i]);
-			g->GetParticle()->SetVelocity(Vector3D());
-			g->GetParticle()->SetAcceleration(Vector3D());
+			g->GetParticle()->SetVelocity(Vector3f());
+			g->GetParticle()->SetAcceleration(Vector3f());
 		}
-	}
-}
-
-void ParticleManager::AddGenerator(ForceGenerator* fg)
-{
-	for (GameObject* g : gameObjects)
-	{
-		g->GetParticle()->AddGenerator(fg);
 	}
 }
 
@@ -69,7 +61,7 @@ void ParticleManager::Update(float t)
 	{
 		g->Update(t);
 
-		if (g->GetParticle()->GetLifetimer() >= killTime && g->GetParticle()->GetIsKillable())
+		if (g->GetParticle()->GetLifeTimer() >= killTime && g->GetParticle()->GetIsKillable())
 		{
 			RepositionParticle(g);
 			g->GetParticle()->ResetLifeTimer();

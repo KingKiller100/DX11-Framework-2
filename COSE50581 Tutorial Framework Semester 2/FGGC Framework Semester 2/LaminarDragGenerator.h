@@ -1,17 +1,19 @@
 #pragma once
 #include "ForceGenerator.h"
 
-class LaminarDragGenerator : public ForceGenerator
+class LaminarDragGenerator final : public ForceGenerator
 {
 public:
 	LaminarDragGenerator();
+	LaminarDragGenerator(const float dc);
 	~LaminarDragGenerator();
 
-	void SetDragCoefficient(float dg) { dragCoefficient = dg; }
+	float GetDragCoefficient() const						{ return dragCoefficient; }
+	void SetDragCoefficient(const float dg)					{ dragCoefficient = dg; }
 
-	void Update(Particle* p, float deltaTime);
+	void Update(Particle* p) override;
 	
 private:
-	float dragCoefficient = 0.40f;
+	float dragCoefficient;
 };
 
