@@ -382,7 +382,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Transformation.cpp" />
@@ -409,7 +409,7 @@
     <ClInclude Include="Maths\kMaths.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="GravityGenerator.h" />
-    <ClInclude Include="ParticleManager.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Quarternion.h" />
     <CLInclude Include="resource.h" />

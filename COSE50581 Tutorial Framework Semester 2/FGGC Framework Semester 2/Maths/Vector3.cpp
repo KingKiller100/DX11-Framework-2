@@ -1,44 +1,46 @@
 #include "Vector3.h"
+#include <corecrt_math_defines.h>
+#include <cmath>
 
-template<class precision>
-Vector3<precision>::Vector3(const precision x, const precision y, const precision z) : x(x), y(y), z(z) {/*Empty*/}
+template<class TypePrecision>
+Vector3<TypePrecision>::Vector3(const TypePrecision x, const TypePrecision y, const TypePrecision z) : x(x), y(y), z(z) {/*Empty*/}
 
-template<class precision>
-Vector3<precision>::Vector3(const precision &f)
+template<class TypePrecision>
+Vector3<TypePrecision>::Vector3(const TypePrecision &f)
 {
 	x = y = z = f;
 }
 
-template<class precision>
-Vector3<precision>::Vector3()
+template<class TypePrecision>
+Vector3<TypePrecision>::Vector3()
 {
 	x = y = z = 0.f;
 }
 
-template<class precision>
-Vector3<precision>::~Vector3()
+template<class TypePrecision>
+Vector3<TypePrecision>::~Vector3()
 = default;
 
-template<class precision>
-precision Vector3<precision>::MagnitudeSQ(const Vector3<precision>& v)
+template<class TypePrecision>
+TypePrecision Vector3<TypePrecision>::MagnitudeSQ(const Vector3<TypePrecision>& v)
 {
 	return (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
 }
 
-template<class precision>
-precision Vector3<precision>::Magnitude(const Vector3<precision> &v)
+template<class TypePrecision>
+TypePrecision Vector3<TypePrecision>::Magnitude(const Vector3<TypePrecision> &v)
 {
 	return sqrtf(MagnitudeSQ(v));
 }
 
-template<class precision>
-precision Vector3<precision>::DotProduct(const Vector3<precision>& v, const Vector3<precision>& u)
+template<class TypePrecision>
+TypePrecision Vector3<TypePrecision>::DotProduct(const Vector3<TypePrecision>& v, const Vector3<TypePrecision>& u)
 {
 	return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
 }
 
-template<class precision>
-precision Vector3<precision>::AngleBetweenVectors(const Vector3<precision>& v, const Vector3<precision>& u, bool inDegrees)
+template<class TypePrecision>
+TypePrecision Vector3<TypePrecision>::AngleBetweenVectors(const Vector3<TypePrecision>& v, const Vector3<TypePrecision>& u, bool inDegrees)
 {
 	const float angle = DotProduct(v, u) / (Magnitude(v) * Magnitude(u));
 	
@@ -47,30 +49,30 @@ precision Vector3<precision>::AngleBetweenVectors(const Vector3<precision>& v, c
 	return inDegrees ? acos(angle) * toDegrees : acos(angle);
 }
 
-template<class precision>
-Vector3<precision> Vector3<precision>::CrossProduct(const Vector3<precision>& u, const Vector3<precision>& v)
+template<class TypePrecision>
+Vector3<TypePrecision> Vector3<TypePrecision>::CrossProduct(const Vector3<TypePrecision>& u, const Vector3<TypePrecision>& v)
 {
-	return Vector3<precision>(u.y * v.z - u.z  * v.y,
+	return Vector3<TypePrecision>(u.y * v.z - u.z  * v.y,
 		u.z * v.x - u.x * v.z, 
 		u.x * v.y - u.y * v.x);
 }
 
-template<class precision>
-Vector3<precision> Vector3<precision>::Normalize(const Vector3<precision>& v)
+template<class TypePrecision>
+Vector3<TypePrecision> Vector3<TypePrecision>::Normalize(const Vector3<TypePrecision>& v)
 {
 	const float mag = Magnitude(v);	
 
 	return mag == 0 ? v / mag : v;
 }
 
-template<class precision>
-void Vector3<precision>::Zero()
+template<class TypePrecision>
+void Vector3<TypePrecision>::Zero()
 {
 	x = y = z = 0;
 }
 
-template<class precision>
-void Vector3<precision>::Truncate(const float max)
+template<class TypePrecision>
+void Vector3<TypePrecision>::Truncate(const float max)
 {
 	if (fabsf(Magnitude(*this)) > max)
 	{
@@ -78,24 +80,24 @@ void Vector3<precision>::Truncate(const float max)
 	}
 }
 
-template<class precision>
-Vector3<precision> Vector3<precision>::ReverseVector()
+template<class TypePrecision>
+Vector3<TypePrecision> Vector3<TypePrecision>::ReverseVector()
 {
-	Vector3<precision> vec = *this;
+	Vector3<TypePrecision> vec = *this;
 
 	return vec * -1;
 }
 
-template <class precision>
-void Vector3<precision>::ToPositives()
+template <class TypePrecision>
+void Vector3<TypePrecision>::ToPositives()
 {
-	if (x < 0) x = fabsf(x);
-	if (y < 0) y = fabsf(y);
-	if (z < 0) z = fabsf(z);
+	x < 0 ? x = fabsf(x) : x;
+	y < 0 ? y = fabsf(y) : y;
+	z < 0 ? z = fabsf(z) : z;
 }
 
-template<class precision>
-precision Vector3<precision>::Distance(const Vector3 & v)
+template<class TypePrecision>
+TypePrecision Vector3<TypePrecision>::Distance(const Vector3 & v)
 {
 	return Magnitude(v - *this);
 }

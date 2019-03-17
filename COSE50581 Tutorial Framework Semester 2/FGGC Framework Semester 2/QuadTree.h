@@ -47,7 +47,7 @@ private:
 
 private:
 	void Subdivide();
-	int GetIndex(GameObject *g);
+	int GetIndex(GameObject *g) const;
 
 	void CreateNE(const Vector3f &subPosition, const Vector3f &subScale);
 	void CreateNW(const Vector3f &subPosition, const Vector3f &subScale);

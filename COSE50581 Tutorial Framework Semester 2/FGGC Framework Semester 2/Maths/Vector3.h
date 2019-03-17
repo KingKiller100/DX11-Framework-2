@@ -1,30 +1,26 @@
 #pragma once
+#include <algorithm>
 
-#include <math.h>
-
-#define _USE_MATH_DEFINES
-#include <cmath>
-
-template<class precision>
-struct Vector3
+template<class TypePrecision>
+struct Vector3 final
 {
-	float x, y, z;
+	TypePrecision x, y, z;
 
 	Vector3();
-	Vector3(const precision x, const precision y, const precision z);
-	Vector3(const precision &f);
+	Vector3(const TypePrecision x, const TypePrecision y, const TypePrecision z);
+	Vector3(const TypePrecision &f);
 
 	~Vector3();
 
-	static precision Magnitude(const Vector3& v);
+	static TypePrecision Magnitude(const Vector3& v);
 
-	static precision MagnitudeSQ(const Vector3& v);
+	static TypePrecision MagnitudeSQ(const Vector3& v);
 		
 	// Produces the dot product
-	static precision DotProduct(const Vector3& v, const Vector3& u);
+	static TypePrecision DotProduct(const Vector3& v, const Vector3& u);
 
 	// Finds angle between two vectors in degrees/radians
-	static precision AngleBetweenVectors(const Vector3& v, const Vector3& u, bool inDegrees);
+	static TypePrecision AngleBetweenVectors(const Vector3& v, const Vector3& u, bool inDegrees = false);
 
 	// Outputs the normal between two vectors
 	static Vector3 CrossProduct(const Vector3& u, const Vector3& v);
@@ -45,7 +41,7 @@ struct Vector3
 	void ToPositives();
 
 	// Calculates distance between two 3D objects
-	precision Distance(const Vector3 &v);
+	TypePrecision Distance(const Vector3 &v);
 
 	// Overloads + operator to add two vectors objects
 	Vector3 operator+(const Vector3& v) const													{ return Vector3(this->x + v.x, this->y + v.y, this->z + v.z); }
@@ -54,19 +50,19 @@ struct Vector3
 	Vector3 operator-(const Vector3& v) const													{ return Vector3(this->x - v.x, this->y - v.y, this->z - v.z); }
 
 	// Overloads * operator to multiply a vector and float object
-	Vector3 operator*(const precision& f) const													{ return Vector3(this->x * f, this->y * f, this->z * f); }
+	Vector3 operator*(const TypePrecision& f) const												{ return Vector3(this->x * f, this->y * f, this->z * f); }
 
 	// Overloads * operator to multiply two vector objects
 	Vector3 operator*(const Vector3& v) const													{ return Vector3(this->x * v.x, this->y * v.y, this->z * v.z); }
 
 	// Overloads / operator to divide a vector and float object
-	Vector3 operator/(const precision& f) const													{ return Vector3(this->x / f, this->y / f, this->z / f); }
+	Vector3 operator/(const TypePrecision& f) const												{ return Vector3(this->x / f, this->y / f, this->z / f); }
 	
 	// Overloads / operator to divide two vectors objects
 	Vector3 operator/(const Vector3& v) const													{ return Vector3(this->x / v.x, this->y / v.y, this->z / v.z); }
 
 	// Overloads = operator to make one vector axis values equal to another
-	Vector3 operator=(const Vector3& v)															{ return Vector3(this->x = v.x, this->y = v.y, this->z = v.z); }
+	Vector3 &operator=(const Vector3& v)														{ return std::move(Vector3(this->x = v.x, this->y = v.y, this->z = v.z)); }
 																								
 	// bool operator == returns true if both Vector3D values are equal							
 	bool operator==(const Vector3& v) const														{ return (this->x == v.x && this->y == v.y && this->z == v.z); }
@@ -74,7 +70,7 @@ struct Vector3
 	// bool operator != returns true if both Vector3D values are NOT equal						
 	bool operator!=(const Vector3& v) const														{ return !(*this == v); }
 
-	// adds to current vector3d value
+	// adds to current vector3 value
 	Vector3& operator+=(const Vector3& v)
 	{
 		*this = *this + v;
@@ -82,7 +78,7 @@ struct Vector3
 		return *this;
 	}
 
-	// divides current vector3d value
+	// divides current vector3 value
 	Vector3& operator-=(const Vector3& v)
 	{
 		*this = *this - v;
@@ -90,7 +86,7 @@ struct Vector3
 		return *this;
 	}
 
-	// divides current vector3d value and sets variable to it
+	// divides current vector3 value and sets variable to it
 	Vector3& operator/=(const Vector3& v)
 	{
 		*this = *this / v;
@@ -98,15 +94,15 @@ struct Vector3
 		return *this;
 	}
 
-	// divides current vector3d value by a float and sets variable to it
-	Vector3& operator/=(const precision& f)
+	// divides current vector3 value by a float and sets variable to it
+	Vector3& operator/=(const TypePrecision& f)
 	{
 		*this = *this / f;
 
 		return *this;
 	}
 
-	// multiplies current vector3d value and sets variable to it
+	// multiplies current vector3 value and sets variable to it
 	Vector3& operator*=(const Vector3& v)
 	{
 		*this = *this * v;
@@ -114,8 +110,8 @@ struct Vector3
 		return *this;
 	}
 
-	// multiply current vector3d value by a float and sets variable to it
-	Vector3& operator*=(const precision& f)
+	// multiply current vector3 value by a float and sets variable to it
+	Vector3& operator*=(const TypePrecision& f)
 	{
 		*this = *this * f;
 

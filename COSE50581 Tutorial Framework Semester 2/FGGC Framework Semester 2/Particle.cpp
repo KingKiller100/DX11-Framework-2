@@ -87,9 +87,9 @@ float Particle::CalculateTerminalVelocity() const
 	
 	const float doubleWeight = 2 * _mass * GravityGenerator(forcesMap["gravity"]).GetGravity();
 
-	const float drag = GetLamDragForceGenerator() != nullptr ? GetLamDragForceGenerator()->GetDragCoefficient() : gettu
+	const float drag = isLaminar ? GetLamDragForceGenerator()->GetDragCoefficient() : GetTurbulentDragGenerator().;
 
-	const float airResistance = airDensity * powf(2*_radius, 2) * for
+	const float airResistance = airDensity * powf(2*_radius, 2) * dragl
 
 	const auto tv = sqrt()
 

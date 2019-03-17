@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleManager.h"
+#include "GameObjectManager.h"
 
 class ControllerManager final
 {
@@ -13,7 +13,7 @@ private:
 	char fly;
 	char jump;
 
-	ParticleManager* ps;
+	GameObjectManager* ps;
 	int currentObject;
 
 private:
@@ -23,7 +23,7 @@ public:
 	~ControllerManager();
 
 	static ControllerManager* Instance();
-	void init(ParticleManager* p);
+	void init(GameObjectManager* p);
 
 	void Update();
 

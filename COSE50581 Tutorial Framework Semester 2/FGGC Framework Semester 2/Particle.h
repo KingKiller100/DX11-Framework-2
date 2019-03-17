@@ -73,7 +73,7 @@ public:
 
 	// Coefficient of Restitution Accessors
 	float GetCoefficientOfRestitution()													const { return coefficientOfRestitution; }
-	void SetCoefficientOfRestitution(const float cor)									{ coefficientOfRestitution = cor; }
+	void SetCoefficientOfRestitution(const float cor)									{ if (cor >= 0 && cor <= 1) coefficientOfRestitution = cor; }
 	
 	// MaxSpeed Accessor Methods
 	float GetMaxSpeed()																	const { return maxSpeed; }
@@ -89,8 +89,8 @@ public:
 	// Forces Map
 	std::map<std::string, ForceGenerator*> GetForcesList() const						{ return forcesMap; }
 	GravityGenerator* GetGravityForceGenerator() const									{ return dynamic_cast<GravityGenerator*>(forcesMap.at("gravity")); }
-	LaminarDragGenerator* GetLamDragForceGenerator() const								{ return forcesMap.find("laminar") != forcesMap.end() ? dynamic_cast<LaminarDragGenerator*>(forcesMap.at("laminar")) : nullptr; }
-	TurbulentDragGenerator* GetPushForceGenerator() const								{ return forcesMap.find("push") != forcesMap.end() ? dynamic_cast<TurbulentDragGenerator*>(forcesMap.at("push")) : nullptr; }
+	LaminarDragGenerator* GetLamDragForceGenerator() const								{ return dynamic_cast<LaminarDragGenerator*>(forcesMap.at("laminar")); }
+	TurbulentDragGenerator* GetTurbulentDragGenerator() const							{ return dynamic_cast<TurbulentDragGenerator*>(forcesMap.at("push")); }
 	
 	// Terminal Velocity
 	float CalculateTerminalVelocity() const;

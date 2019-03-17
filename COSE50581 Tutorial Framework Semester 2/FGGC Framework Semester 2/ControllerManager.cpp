@@ -30,7 +30,7 @@ ControllerManager * ControllerManager::Instance()
 	return mInstance;
 }
 
-void ControllerManager::init(ParticleManager* p)
+void ControllerManager::init(GameObjectManager* p)
 {
 	ps = p;
 }

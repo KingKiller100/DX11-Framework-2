@@ -2,9 +2,10 @@
 
 #define MAXOBJECTDENSITY 0
 #define MAXLEVELS 10
+
 QuadTree::QuadTree(Quadrant * b, const unsigned lvl) : level(lvl), bounds(b)
 {
-	for (unsigned int i = 0; i < nodes.size(); i++)
+	for (unsigned char i = 0; i < nodes.size(); i++)
 	{
 		nodes[i] = nullptr;
 	}
@@ -27,7 +28,7 @@ void QuadTree::Clear()
 {
 	gameObjectList.clear();
 
-	for (int i = 0; i < nodes.size(); i++)
+	for (unsigned char i = 0; i < nodes.size(); i++)
 	{
 		if (nodes[i])
 		{
@@ -52,25 +53,25 @@ void QuadTree::Subdivide()
 void QuadTree::CreateNE(const Vector3f &subPosition, const Vector3f &subScale)
 {
 	if (!nodes[NORTHEAST])
-		nodes[NORTHEAST] = new QuadTree(new Quadrant(Vector3f(subPosition.x + subScale.x, subPosition.y, subPosition.z - subScale.z), subPosition), level + 1);
+		nodes[NORTHEAST] = new QuadTree(new Quadrant(Vector3f(subPosition.x + subScale.x, subPosition.y, subPosition.z + subScale.z), subPosition), level + 1);
 }
 
 void QuadTree::CreateNW(const Vector3f &subPosition, const Vector3f &subScale)
 {
 	if (!nodes[NORTHWEST])
-		nodes[NORTHWEST] = new QuadTree(new Quadrant(subX - subWidth * .5f, subY + subHeight * .5f, subWidth, subHeight), level + 1);
+		nodes[NORTHWEST] = new QuadTree(new Quadrant(Vector3f(subPosition.x - subScale.x, subPosition.y, subPosition.z + subScale.z), level + 1));
 }
 
 void QuadTree::CreateSE(const Vector3f &subPosition, const Vector3f &subScale)
 {
 	if (!nodes[SOUTHEAST])
-		nodes[SOUTHEAST] = new QuadTree(new Quadrant(subX + subWidth * .5f, subY - subHeight * .5f, subWidth, subHeight), level + 1);
+		nodes[SOUTHEAST] = new QuadTree(new Quadrant(Vector3f(subPosition.x + subScale.x, subPosition.y, subPosition.z - subScale.z), level + 1));
 }
 
 void QuadTree::CreateSW(const Vector3f &subPosition, const Vector3f &subScale)
 {
 	if (!nodes[SOUTHWEST])
-		nodes[SOUTHWEST] = new QuadTree(new Quadrant(subX - subWidth * .5f, subY - subHeight * .5f, subWidth, subHeight), level + 1);
+		nodes[SOUTHWEST] = new QuadTree(new Quadrant(Vector3f(subPosition.x - subScale.x, subPosition.y, subPosition.z - subScale.z), level + 1));
 }
 
 /*
@@ -78,34 +79,32 @@ void QuadTree::CreateSW(const Vector3f &subPosition, const Vector3f &subScale)
 *-1 means object aren't completely fit within a child node
 * of the parent node
 */
-int QuadTree::GetIndex(GameObject *g) const
+int QuadTree::GetIndex(class GameObject* g) const
 {
 	signed int index = -1;
 	const Vector3f midpoint = bounds->position;
 
-	const Vector3f entityDimension = e->hasComponent<component::RectCollider>() ?
-		Vector3f(e->getComponent<component::RectCollider>()->GetWidth(), e->getComponent<component::RectCollider>()->GetHeight())
-		: Vector3f(e->getComponent<component::CircleCollider>()->GetRadius());
+	const auto particle = *g->GetParticle();
+	const auto transform = *g->GetTransformation();
 
-	const Vector3f offset = e->hasComponent<component::RectCollider>() ? e->getComponent<component::RectCollider>()->GetOffset()
-		: e->getComponent<component::CircleCollider>()->GetOffset();
-
-	const Vector3f entityPos = e->getComponent<component::Transform>()->GetPositionV2D() + offset;
+	const float radius = particle.GetRadius();	
+	const Vector3f position = transform.GetPosition();
 
 	// Can object fully fit inside top quadrant
-	const bool topQuad = entityPos.Y - entityDimension.Y > midpoint.Y;
+	const bool topQuad = position.z - radius > midpoint.z;
+
 	// Can object fully fit inside bottom quadrant
-	const bool bottomQuad = entityPos.Y - entityDimension.Y < midpoint.Y && entityPos.Y + entityDimension.Y < midpoint.Y;
+	const bool bottomQuad = position.z - radius < midpoint.z && position.z + radius < midpoint.z;
 
 	// Can object completely fit inside left quadrant
-	if (entityPos.X - entityDimension.X < midpoint.X && entityPos.X + entityDimension.X < midpoint.X) // West-side
+	if (position.x - radius < midpoint.x && position.x + radius < midpoint.x) // West-side
 	{
 		if (topQuad)
 			index = NORTHWEST;
 		else if (bottomQuad)
 			index = SOUTHWEST;
 	}
-	else if (entityPos.X - entityDimension.X > midpoint.X) // East-side
+	else if (position.x - radius > midpoint.x) // East-side
 	{
 		if (topQuad)
 			index = NORTHEAST;
@@ -116,20 +115,20 @@ int QuadTree::GetIndex(GameObject *g) const
 	return index;
 }
 
-void QuadTree::AddIntoTree(GameObject *e)
+void QuadTree::Insert(GameObject *g)
 {
-	int index = GetIndex(e);
+	int index = GetIndex(g);
 
 	if (index != -1)
 	{
 		if (nodes[index] && level < MAXLEVELS)
 		{
-			nodes[index]->AddIntoTree(e);
+			nodes[index]->Insert(g);
 			return;
 		}
 	}
 
-	gameObjectList.emplace_back(e);
+	gameObjectList.emplace_back(g);
 
 	if (index != -1)
 		if (gameObjectList.size() > MAXOBJECTDENSITY && level < MAXLEVELS)
@@ -145,7 +144,7 @@ void QuadTree::AddIntoTree(GameObject *e)
 
 				if (index != -1)
 				{
-					nodes[index]->AddIntoTree(gameObjectList[i]);
+					nodes[index]->Insert(gameObjectList[i]);
 					gameObjectList.erase(gameObjectList.begin() + i);
 				}
 				else
@@ -153,16 +152,17 @@ void QuadTree::AddIntoTree(GameObject *e)
 			}
 		}
 }
-void QuadTree::CollidablesList(std::vector<GameObject*> &returnList, GameObject *e)
+
+void QuadTree::retrieve(vector<GameObject*>& returnList, GameObject* g)
 {
-	const int index = GetIndex(e);
+	const int index = GetIndex(g);
 
 	if (index != -1 && nodes[index])
-		nodes[index]->CollidablesList(returnList, e);
+		nodes[index]->retrieve(returnList, g);
 
-	for (GameObject *entity : gameObjectList)
+	for (auto currentGO : gameObjectList)
 	{
-		if (e != entity)
-			returnList.emplace_back(entity);
+		if (g != currentGO)
+			returnList.emplace_back(g);
 	}
 }

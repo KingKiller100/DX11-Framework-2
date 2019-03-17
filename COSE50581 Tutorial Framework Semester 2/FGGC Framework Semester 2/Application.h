@@ -14,7 +14,7 @@
 #include "Maths/kMaths.h"
 #include "ControllerManager.h"
 #include "CollisionsManager.h"
-#include "ParticleManager.h"
+#include "GameObjectManager.h"
 #include "Appearance.h"
 #include "Particle.h"
 #include "Transformation.h"
@@ -112,7 +112,7 @@ private:
 	UINT _WindowHeight;
 	UINT _WindowWidth;
 
-	ParticleManager* _particleManager;
+	GameObjectManager* _goManager;
 	GravityGenerator* gravity;
 	LaminarDragGenerator* lamDrag;
 	TurbulentDragGenerator* turbDrag;
