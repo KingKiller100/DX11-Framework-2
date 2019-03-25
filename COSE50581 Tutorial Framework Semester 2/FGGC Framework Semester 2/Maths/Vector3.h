@@ -12,6 +12,8 @@ struct Vector3 final
 
 	~Vector3();
 
+	T& operator[](size_t index) { return *(reinterpret_cast<T*>(this) + index); }
+
 	static T Magnitude(const Vector3& v);
 
 	static T MagnitudeSQ(const Vector3& v);

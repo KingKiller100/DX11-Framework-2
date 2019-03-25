@@ -30,7 +30,7 @@ private:
 	bool isKillable;
 
 private:
-	void UpdateNetForce(const float t);
+	void UpdateNetForce();
 	void UpdateAccel();
 	void MoveParticle(const float t) const;
 	void UpdateVelocity(const float t);

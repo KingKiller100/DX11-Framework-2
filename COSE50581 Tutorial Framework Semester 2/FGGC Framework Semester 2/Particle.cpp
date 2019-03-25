@@ -41,7 +41,7 @@ void Particle::Update(const float t)
 
 	const auto dt = t > 1.f / 60.f ? 1.f / 60.f : t;
 
-	UpdateNetForce(dt);
+	UpdateNetForce();
 	UpdateAccel();
 	MoveParticle(dt);
 	UpdateVelocity(dt);
@@ -61,7 +61,7 @@ void Particle::AddGenerator(const std::string &id, ForceGenerator* fg)
 	forcesMap.insert(std::pair<std::string, ForceGenerator*>(id, fg));
 }
 
-void Particle::UpdateNetForce(const float t)
+void Particle::UpdateNetForce()
 {
 	for (auto fg : forcesMap)
 		fg.second->Update(this);

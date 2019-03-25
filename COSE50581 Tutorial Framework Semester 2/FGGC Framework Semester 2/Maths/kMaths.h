@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <corecrt_math_defines.h>
 
-using Vector3i = Vector3<int>;
-using Vector3f = Vector3<float>; 
-using Vector3d = Vector3<double>; 
-using Vector3u = Vector3<unsigned>;
+typedef  Vector3<int>		Vector3i;
+typedef  Vector3<float>		Vector3f;
+typedef  Vector3<double>	Vector3d;
+typedef  Vector3<unsigned>	Vector3u;
 
 #define TAU (M_PI * 2)
 

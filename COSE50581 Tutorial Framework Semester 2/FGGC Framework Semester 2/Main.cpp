@@ -9,7 +9,7 @@ void GameLoopDelay(const float frameStartTime)
 	if (frameProcessingTime < 1.f/60.f)
 	{
 		//  delay so that time interval between adjacent frames is equal to preset value
-		Sleep(1.f/60.f - frameProcessingTime);
+		Sleep(float(1.f/60.f) - frameProcessingTime);
 	}
 }
 
@@ -53,7 +53,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         else
         {
-			const auto frameStartTime = GetTickCount();
+			const float frameStartTime = GetTickCount();
 
 			if (GetAsyncKeyState(VK_ESCAPE))			
 				break;
