@@ -76,6 +76,7 @@
     <ClInclude Include="GameObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Patterns\Command.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

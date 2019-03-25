@@ -82,23 +82,25 @@ bool CollisionsManager::CheckBoundingBox(GameObject * go1, GameObject * go2)
 	// /*return (aMinX <= bMaxX && aMaxX >= bMinX) &&
 	// 	(aMinY <= bMaxY && aMaxY >= bMinY) && 
 	// 	(aMinZ <= bMaxZ && aMaxZ >= bMinZ);*/
+
+	return false;
 }
 
-bool CollisionsManager::CheckBoundingPlane(GameObject * go1, GameObject * go2) const
+bool CollisionsManager::CheckBoundingPlane(GameObject * go, GameObject * plane) const
 {
 	// Store plane data as if it's a 2D shape - only using x and y axis
-	float planeMaxX = go2->GetTransformation()->GetPosition().x + go2->GetTransformation()->GetScale().x;
-	float planeMinX = go2->GetTransformation()->GetPosition().x - go2->GetTransformation()->GetScale().x;
-	float planeMaxY = go2->GetTransformation()->GetPosition().y;
-	float planeMaxZ = go2->GetTransformation()->GetPosition().z + go2->GetTransformation()->GetScale().z;
-	float planeMinZ = go2->GetTransformation()->GetPosition().z - go2->GetTransformation()->GetScale().z;
+	const float planeMaxX = plane->GetTransformation()->GetPosition().x + plane->GetTransformation()->GetScale().x;
+	const float planeMinX = plane->GetTransformation()->GetPosition().x - plane->GetTransformation()->GetScale().x;
+	const float planeMaxY = plane->GetTransformation()->GetPosition().y;
+	const float planeMaxZ = plane->GetTransformation()->GetPosition().z + plane->GetTransformation()->GetScale().z;
+	const float planeMinZ = plane->GetTransformation()->GetPosition().z - plane->GetTransformation()->GetScale().z;
 
 
-	float objectMaxX = go1->GetTransformation()->GetPosition().x + go1->GetParticle()->GetRadius();
-	float objectMinX = go1->GetTransformation()->GetPosition().x - go1->GetParticle()->GetRadius();
-	float objectMinY = go1->GetTransformation()->GetPosition().y - go1->GetParticle()->GetRadius();
-	float objectMaxZ = go1->GetTransformation()->GetPosition().z + go1->GetParticle()->GetRadius();
-	float objectMinZ = go1->GetTransformation()->GetPosition().z - go1->GetParticle()->GetRadius();
+	const float objectMaxX = go->GetTransformation()->GetPosition().x + go->GetParticle()->GetRadius();
+	const float objectMinX = go->GetTransformation()->GetPosition().x - go->GetParticle()->GetRadius();
+	const float objectMinY = go->GetTransformation()->GetPosition().y - go->GetParticle()->GetRadius();
+	const float objectMaxZ = go->GetTransformation()->GetPosition().z + go->GetParticle()->GetRadius();
+	const float objectMinZ = go->GetTransformation()->GetPosition().z - go->GetParticle()->GetRadius();
 
 	return (planeMinX <= objectMaxX && planeMaxX >= objectMinX) && 
 		(objectMinY <= planeMaxY) && 
@@ -109,13 +111,13 @@ void CollisionsManager::Separation(GameObject * go1, GameObject* go2)
 {
 	// Separate objects after inter-object collision
 	
-	float radiiSum = go1->GetParticle()->GetRadius() + go2->GetParticle()->GetRadius();
-	float distance = Vector3f::Magnitude(go1->GetTransformation()->GetPosition() - go2->GetTransformation()->GetPosition());
-	float depth = radiiSum - distance;
-	Vector3f direction = Vector3f::Normalize(go1->GetTransformation()->GetPosition() - go2->GetTransformation()->GetPosition());
+	const float radiiSum = go1->GetParticle()->GetRadius() + go2->GetParticle()->GetRadius();
+	const float distance = Vector3f::Magnitude(go1->GetTransformation()->GetPosition() - go2->GetTransformation()->GetPosition());
+	const float depth = radiiSum - distance;
+	const Vector3f direction = Vector3f::Normalize(go1->GetTransformation()->GetPosition() - go2->GetTransformation()->GetPosition());
 
-	Vector3f object1Pos = go1->GetTransformation()->GetPosition() + direction * depth;
-	Vector3f object2Pos = go2->GetTransformation()->GetPosition() - direction * depth;
+	const Vector3f object1Pos = go1->GetTransformation()->GetPosition() + direction * depth;
+	const Vector3f object2Pos = go2->GetTransformation()->GetPosition() - direction * depth;
 
 	go1->GetTransformation()->SetPosition(object1Pos);
 	go2->GetTransformation()->SetPosition(object2Pos);
@@ -137,14 +139,14 @@ void CollisionsManager::ResolveCollision(GameObject* go1, GameObject* go2)
 	firstRest = go1->GetParticle()->GetVelocity() * go1->GetParticle()->GetMass();
 	secondRest = go2->GetParticle()->GetVelocity() * go2->GetParticle()->GetMass();
 
-	Vector3f temp = finalVel1 * go1->GetParticle()->GetMass();
+	const Vector3f temp = finalVel1 * go1->GetParticle()->GetMass();
 	Vector3f finalVel2 = (firstRest + secondRest - temp) / go2->GetParticle()->GetMass();
 
 	Vector3f norm1 = Vector3f::Normalize(go1->GetTransformation()->GetPosition() - go2->GetTransformation()->GetPosition());
-	Vector3f norm2 = norm1.ReverseVector();
+	const Vector3f norm2 = norm1.ReverseVector();
 
-	Vector3f relativeVel1 = norm1  * Vector3f::DotProduct(norm1, finalVel1);
-	Vector3f relativeVel2 = norm2 * Vector3f::DotProduct(norm2, finalVel2);
+	const Vector3f relativeVel1 = norm1  * Vector3f::DotProduct(norm1, finalVel1);
+	const Vector3f relativeVel2 = norm2 * Vector3f::DotProduct(norm2, finalVel2);
 
 	finalVel1 += relativeVel2 - relativeVel1;
 	finalVel2 += relativeVel1 - relativeVel2;

@@ -1,8 +1,8 @@
 #pragma once
+#include <map>
+#include "Maths/kMaths.h"
 #include "Transformation.h"
 #include "ForceGenerator.h"
-#include "Maths/kMaths.h"
-#include <map>
 #include "GravityGenerator.h"
 #include "LaminarDragGenerator.h"
 #include "TurbulentDragGenerator.h"
@@ -30,10 +30,10 @@ private:
 	bool isKillable;
 
 private:
-	void UpdateNetForce(float &t);
+	void UpdateNetForce(const float t);
 	void UpdateAccel();
-	void MoveParticle(float &t) const;
-	void UpdateVelocity(float &t);
+	void MoveParticle(const float t) const;
+	void UpdateVelocity(const float t);
 
 public:
 	Particle(Transformation* _transform);
@@ -98,6 +98,6 @@ public:
 	void AddForce(const Vector3f& f);
 	void AddGenerator(const std::string &id, ForceGenerator* fg);
 
-	void Update(float& t);
+	void Update(const float t);
 };
 

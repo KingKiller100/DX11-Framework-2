@@ -1,9 +1,11 @@
 #pragma once
 #include "GameObjectManager.h"
+#include "Patterns/Command.h"
 
 class ControllerManager final
 {
 private:
+
 	static ControllerManager* mInstance;
 
 	char moveForward;
@@ -13,14 +15,20 @@ private:
 	char fly;
 	char jump;
 
-	GameObjectManager* ps;
+	GameObjectManager* _gm;
 	int currentObject;
+
+	Command* _buttonJ;
 
 private:
 	ControllerManager();
 
+	void BindJumpCommand();
+
 public:
 	~ControllerManager();
+	ControllerManager(const ControllerManager &) = delete;
+	ControllerManager(const ControllerManager &&) = delete;
 
 	static ControllerManager* Instance();
 	void init(GameObjectManager* p);

@@ -1,74 +1,144 @@
 ﻿  Application.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\patterns\command.h(26): warning C4100: 'p': unreferenced formal parameter
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(220): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(231): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(232): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(233): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(235): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(236): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(237): error C2039: 'AddGenerator': is not a member of 'GameObjectManager'
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.h(6): note: see declaration of 'GameObjectManager'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(730): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(764): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(766): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(769): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(771): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(722): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(756): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(758): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(761): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(763): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\clock.h(20): warning C4244: 'return': conversion from '__int64' to 'double', possible loss of data
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\clock.h(14): note: while compiling class template member function 'double Clock<std::chrono::milliseconds>::GetElapsedTime(void)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(722): note: see reference to function template instantiation 'double Clock<std::chrono::milliseconds>::GetElapsedTime(void)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\application.cpp(722): note: see reference to class template instantiation 'Clock<std::chrono::milliseconds>' being compiled
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   CollisionsManager.cpp
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\collisionsmanager.cpp(29): warning C4100: 'go2': unreferenced formal parameter
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\collisionsmanager.cpp(29): warning C4100: 'go1': unreferenced formal parameter
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   ControllerManager.cpp
-  LaminarDragGenerator.cpp
-  Main.cpp
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(8): warning C4244: '=': conversion from 'DWORD' to 'float', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(15): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(59): warning C4244: 'initializing': conversion from 'DWORD' to 'float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\patterns\command.h(26): warning C4100: 'p': unreferenced formal parameter
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   GameObject.cpp
-  Particle.cpp
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(59): warning C4100: 't': unreferenced formal parameter
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(88): error C2678: binary '[': no operator found which takes a left-hand operand of type 'const std::map<std::string,ForceGenerator *,std::less<_Kty>,std::allocator<std::pair<const _Kty,_Ty>>>' (or there is no acceptable conversion)
-          with
-          [
-              _Kty=std::string,
-              _Ty=ForceGenerator *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.14.26428\include\map(361): note: could be 'ForceGenerator *&std::map<std::string,ForceGenerator *,std::less<_Kty>,std::allocator<std::pair<const _Kty,_Ty>>>::operator [](const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &)'
-          with
-          [
-              _Kty=std::string,
-              _Ty=ForceGenerator *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.14.26428\include\map(197): note: or       'ForceGenerator *&std::map<std::string,ForceGenerator *,std::less<_Kty>,std::allocator<std::pair<const _Kty,_Ty>>>::operator [](std::basic_string<char,std::char_traits<char>,std::allocator<char>> &&)'
-          with
-          [
-              _Kty=std::string,
-              _Ty=ForceGenerator *
-          ]
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(88): note: while trying to match the argument list '(const std::map<std::string,ForceGenerator *,std::less<_Kty>,std::allocator<std::pair<const _Kty,_Ty>>>, const char [8])'
-          with
-          [
-              _Kty=std::string,
-              _Ty=ForceGenerator *
-          ]
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(90): error C2065: 'gettu': undeclared identifier
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(90): error C2789: 'drag': an object of const-qualified type must be initialized
-  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(90): note: see declaration of 'drag'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(92): error C2143: syntax error: missing ';' before 'const'
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(92): error C2059: syntax error: 'for'
-  GravityGenerator.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   GameObjectManager.cpp
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.cpp(8): warning C4457: declaration of 'g' hides function parameter
   c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gameobjectmanager.cpp(3): note: see declaration of 'g'
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
+  GravityGenerator.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gravitygenerator.h(12): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\gravitygenerator.h(21): note: see reference to class template instantiation 'Vector3<float>' being compiled
+  LaminarDragGenerator.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
+  Main.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\patterns\command.h(26): warning C4100: 'p': unreferenced formal parameter
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(5): warning C4244: 'initializing': conversion from 'DWORD' to 'float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(5): warning C4244: 'initializing': conversion from 'DWORD' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(12): warning C4244: 'argument': conversion from 'float' to 'DWORD', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\main.cpp(64): warning C4244: 'argument': conversion from 'const DWORD' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
+  Vector3.cpp
+  Particle.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(64): warning C4100: 't': unreferenced formal parameter
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(94): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\particle.cpp(94): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   QuadTree.cpp
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\quadtree.cpp(62): warning C4244: 'argument': conversion from 'u_int' to 'const float', possible loss of data
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\quadtree.cpp(68): warning C4244: 'argument': conversion from 'u_int' to 'const float', possible loss of data
 c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\quadtree.cpp(74): warning C4244: 'argument': conversion from 'u_int' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   RigidBody.cpp
   Transformation.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(22): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\transformation.h(10): note: see reference to class template instantiation 'Vector3<float>' being compiled
   TurbulentDragGenerator.cpp
-  Vector3.cpp
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\turbulentdraggenerator.cpp(26): warning C4244: 'argument': conversion from 'const double' to 'const float', possible loss of data
+c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): warning C4239: nonstandard extension used: 'return': conversion from 'Vector3<float>' to 'Vector3<float> &'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: A non-const reference may only be bound to an lvalue
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\maths\vector3.h(65): note: while compiling class template member function 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)'
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\turbulentdraggenerator.h(14): note: see reference to function template instantiation 'Vector3<float> &Vector3<float>::operator =(const Vector3<float> &)' being compiled
+  c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\turbulentdraggenerator.h(20): note: see reference to class template instantiation 'Vector3<float>' being compiled
   Generating Code...
-c:\users\d012120g\documents\dx11-framework-2\cose50581 tutorial framework semester 2\fggc framework semester 2\collisionsmanager.cpp(85): error C4716: 'CollisionsManager::CheckBoundingBox': must return a value
+Appearance.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+Transformation.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+TurbulentDragGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+Particle.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+GravityGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+GameObjectManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+QuadTree.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+Application.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+CollisionsManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+ControllerManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+LaminarDragGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float,float,float)" (??0?$Vector3@M@@QAE@MMM@Z)
+Transformation.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+TurbulentDragGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+Particle.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+GravityGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+GameObjectManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+QuadTree.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+Application.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+CollisionsManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+ControllerManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+LaminarDragGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::~Vector3<float>(void)" (??1?$Vector3@M@@QAE@XZ)
+Application.obj : error LNK2001: unresolved external symbol "private: static class std::chrono::time_point<struct std::chrono::steady_clock,class std::chrono::duration<__int64,struct std::ratio<1,1000000000> > > Clock<class std::chrono::duration<__int64,struct std::ratio<1,1000> > >::prevTime" (?prevTime@?$Clock@V?$duration@_JU?$ratio@$00$0DOI@@std@@@chrono@std@@@@0V?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@A)
+Application.obj : error LNK2001: unresolved external symbol "private: static class std::chrono::time_point<struct std::chrono::steady_clock,class std::chrono::duration<__int64,struct std::ratio<1,1000000000> > > Clock<class std::chrono::duration<__int64,struct std::ratio<1,1000> > >::currentTime" (?currentTime@?$Clock@V?$duration@_JU?$ratio@$00$0DOI@@std@@@chrono@std@@@@0V?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@std@@A)
+CollisionsManager.obj : error LNK2019: unresolved external symbol "public: static float __cdecl Vector3<float>::Magnitude(struct Vector3<float> const &)" (?Magnitude@?$Vector3@M@@SAMABU1@@Z) referenced in function "public: void __thiscall CollisionsManager::Separation(class GameObject *,class GameObject *)" (?Separation@CollisionsManager@@QAEXPAVGameObject@@0@Z)
+TurbulentDragGenerator.obj : error LNK2001: unresolved external symbol "public: static float __cdecl Vector3<float>::Magnitude(struct Vector3<float> const &)" (?Magnitude@?$Vector3@M@@SAMABU1@@Z)
+CollisionsManager.obj : error LNK2019: unresolved external symbol "public: static float __cdecl Vector3<float>::DotProduct(struct Vector3<float> const &,struct Vector3<float> const &)" (?DotProduct@?$Vector3@M@@SAMABU1@0@Z) referenced in function "public: void __thiscall CollisionsManager::ResolveCollision(class GameObject *,class GameObject *)" (?ResolveCollision@CollisionsManager@@QAEXPAVGameObject@@0@Z)
+CollisionsManager.obj : error LNK2019: unresolved external symbol "public: static struct Vector3<float> __cdecl Vector3<float>::Normalize(struct Vector3<float> const &)" (?Normalize@?$Vector3@M@@SA?AU1@ABU1@@Z) referenced in function "public: void __thiscall CollisionsManager::ResolveCollision(class GameObject *,class GameObject *)" (?ResolveCollision@CollisionsManager@@QAEXPAVGameObject@@0@Z)
+TurbulentDragGenerator.obj : error LNK2001: unresolved external symbol "public: static struct Vector3<float> __cdecl Vector3<float>::Normalize(struct Vector3<float> const &)" (?Normalize@?$Vector3@M@@SA?AU1@ABU1@@Z)
+CollisionsManager.obj : error LNK2019: unresolved external symbol "public: struct Vector3<float> __thiscall Vector3<float>::ReverseVector(void)" (?ReverseVector@?$Vector3@M@@QAE?AU1@XZ) referenced in function "public: void __thiscall CollisionsManager::ResolveCollision(class GameObject *,class GameObject *)" (?ResolveCollision@CollisionsManager@@QAEXPAVGameObject@@0@Z)
+CollisionsManager.obj : error LNK2019: unresolved external symbol "public: float __thiscall Vector3<float>::Distance(struct Vector3<float> const &)" (?Distance@?$Vector3@M@@QAEMABU1@@Z) referenced in function "public: bool __thiscall CollisionsManager::CheckBoundingSphere(class GameObject *,class GameObject *)const " (?CheckBoundingSphere@CollisionsManager@@QBE_NPAVGameObject@@0@Z)
+LaminarDragGenerator.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall ForceGenerator::~ForceGenerator(void)" (??1ForceGenerator@@UAE@XZ) referenced in function "public: virtual __thiscall LaminarDragGenerator::~LaminarDragGenerator(void)" (??1LaminarDragGenerator@@UAE@XZ)
+GravityGenerator.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall ForceGenerator::~ForceGenerator(void)" (??1ForceGenerator@@UAE@XZ)
+TurbulentDragGenerator.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall ForceGenerator::~ForceGenerator(void)" (??1ForceGenerator@@UAE@XZ)
+Particle.obj : error LNK2019: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(void)" (??0?$Vector3@M@@QAE@XZ) referenced in function "public: __thiscall Particle::Particle(class Transformation *)" (??0Particle@@QAE@PAVTransformation@@@Z)
+GravityGenerator.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(void)" (??0?$Vector3@M@@QAE@XZ)
+GameObjectManager.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(void)" (??0?$Vector3@M@@QAE@XZ)
+Transformation.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(void)" (??0?$Vector3@M@@QAE@XZ)
+Particle.obj : error LNK2019: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float)" (??0?$Vector3@M@@QAE@M@Z) referenced in function "public: __thiscall Particle::Particle(class Transformation *)" (??0Particle@@QAE@PAVTransformation@@@Z)
+QuadTree.obj : error LNK2001: unresolved external symbol "public: __thiscall Vector3<float>::Vector3<float>(float)" (??0?$Vector3@M@@QAE@M@Z)
+Particle.obj : error LNK2019: unresolved external symbol "public: void __thiscall Vector3<float>::Zero(void)" (?Zero@?$Vector3@M@@QAEXXZ) referenced in function "public: void __thiscall Particle::Update(float)" (?Update@Particle@@QAEXM@Z)
+C:\Users\d012120g\Documents\DX11-Framework-2\COSE50581 Tutorial Framework Semester 2\FGGC Framework Semester 2\Debug\DX11 Framework.exe : fatal error LNK1120: 13 unresolved externals

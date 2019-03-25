@@ -23,7 +23,7 @@ void TurbulentDragGenerator::Update(Particle* p)
 		const double dragMag = dragCoefficient * _velMag * _velMag;
 
 		// Calculate of x and y componenets of drag force
-		Vector3d dragForce = _unitVel * -dragMag;
+		const Vector3f dragForce = _unitVel * -dragMag;
 
 		p->AddForce(dragForce);
 	}

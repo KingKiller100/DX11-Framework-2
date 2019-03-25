@@ -1,10 +1,10 @@
 #pragma once
-#include <cmath>
 #define _USE_MATH_DEFINES
 #include "Vector3.h"
 #include <algorithm>
 #include <corecrt_math_defines.h>
 
+using Vector3i = Vector3<int>;
 using Vector3f = Vector3<float>; 
 using Vector3d = Vector3<double>; 
 using Vector3u = Vector3<unsigned>;
@@ -19,3 +19,6 @@ TypePrecision DegreesToRadians(const TypePrecision degrees)															{ retu
 
 template<class TypePrecision>
 TypePrecision Clamp(const TypePrecision value, const TypePrecision min, const TypePrecision max)					{ return std::forward<TypePrecision>(std::min(std::max(value, min), max)); }
+
+template<class TypePrecision>
+TypePrecision AbsClamp(const TypePrecision value, const TypePrecision min, const TypePrecision max)					{ return value >= 0 ? Clamp(value, min, max) : -Clamp(value, min, max); }

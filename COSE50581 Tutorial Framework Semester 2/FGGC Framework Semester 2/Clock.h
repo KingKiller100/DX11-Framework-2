@@ -15,9 +15,9 @@ public:
 		prevTime = currentTime;
 		currentTime = HighResolution::now();
 
-		const double elapsedTime = std::chrono::duration_cast<TimeType>(currentTime - prevTime);
+		const auto elapsedTime = std::chrono::duration_cast<TimeType>(currentTime - prevTime);
 
-		return elapsedTime;
+		return elapsedTime.count();
 	}
 	
 private:

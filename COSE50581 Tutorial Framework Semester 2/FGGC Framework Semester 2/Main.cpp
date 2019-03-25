@@ -1,18 +1,15 @@
 #include "Application.h"
 
-void GameLoopDelay(float frameStartTime)
+void GameLoopDelay(const float frameStartTime)
 {
-	//  calculate time elapsed from start of processing current frame
-	float frameProcessingTime, currentFrameTime;
+	const float currentFrameTime = GetTickCount();
 
-	currentFrameTime = GetTickCount();
+	const float frameProcessingTime = currentFrameTime - frameStartTime;
 
-	frameProcessingTime = currentFrameTime - frameStartTime;
-
-	if (frameProcessingTime < 16.67f)
+	if (frameProcessingTime < 1.f/60.f)
 	{
 		//  delay so that time interval between adjacent frames is equal to preset value
-		Sleep(16.67f - frameProcessingTime);
+		Sleep(1.f/60.f - frameProcessingTime);
 	}
 }
 
@@ -56,13 +53,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         }
         else
         {
-			float frameStartTime = GetTickCount();
+			const auto frameStartTime = GetTickCount();
 
-			if (GetAsyncKeyState(VK_ESCAPE))
-			{
+			if (GetAsyncKeyState(VK_ESCAPE))			
 				break;
-			}
-
+			
 			theApp->Update();
             theApp->Draw();
 

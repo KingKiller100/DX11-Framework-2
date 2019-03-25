@@ -2,8 +2,7 @@
 #include "CollisionsManager.h"
 
 // Initialise instance to Null
-ControllerManager* ControllerManager::mInstance = NULL;
-
+ControllerManager* ControllerManager::mInstance = nullptr;
 
 ControllerManager::ControllerManager()
 {
@@ -17,9 +16,17 @@ ControllerManager::ControllerManager()
 	currentObject = 1;
 }
 
+void ControllerManager::BindJumpCommand()
+{
+	_buttonJ = new JumpCommand();
+}
+
 
 ControllerManager::~ControllerManager()
 {
+	delete mInstance;
+
+	delete _buttonJ;
 }
 
 ControllerManager * ControllerManager::Instance()
@@ -32,7 +39,7 @@ ControllerManager * ControllerManager::Instance()
 
 void ControllerManager::init(GameObjectManager* p)
 {
-	ps = p;
+	_gm = p;
 }
 
 void ControllerManager::Update()
@@ -41,30 +48,30 @@ void ControllerManager::Update()
 	if (GetAsyncKeyState(moveForward)) // forward
 	{
 		if (GetAsyncKeyState(VK_SHIFT))
-			ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 3)));
+			_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 3)));
 		else
-			ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2)));
+			_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2)));
 	}
 	else if (GetAsyncKeyState(moveBackward)) // down
 	{
-		ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, -powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2)));
+		_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, 0.0f, -powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2)));
 	}
 
 	if (GetAsyncKeyState(moveRight)) // right
 	{
-		ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(-powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2), 0.0f, 0.0f));
+		_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(-powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2), 0.0f, 0.0f));
 	}
 	else if (GetAsyncKeyState(moveLeft)) // left
 	{
-		ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2), 0.0f, 0.0f));
+		_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2), 0.0f, 0.0f));
 	}
 	if (GetAsyncKeyState(fly)) // fly
 	{
-			ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 2), 0.0f));
+		_buttonJ->Execute(*_gm->GetGameObjectList()[currentObject]->GetParticle());
 	}
 	else if (GetAsyncKeyState(VK_SPACE)) // jump
 	{
-		if (CollisionsManager::Instance()->CheckBoundingPlane(ps->GetGameObjectList()[0], ps->GetGameObjectList()[currentObject]))
-			ps->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, powf(ps->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 3), 0.0f));
+		if (CollisionsManager::Instance()->CheckBoundingPlane(_gm->GetGameObjectList()[0], _gm->GetGameObjectList()[currentObject]))
+			_gm->GetGameObjectList()[currentObject]->GetParticle()->AddForce(Vector3f(0.0f, powf(_gm->GetGameObjectList()[currentObject]->GetParticle()->GetMass(), 3), 0.0f));
 	}
 }
