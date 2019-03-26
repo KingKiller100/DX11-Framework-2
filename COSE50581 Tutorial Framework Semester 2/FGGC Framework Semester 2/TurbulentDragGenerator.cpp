@@ -14,7 +14,7 @@ void TurbulentDragGenerator::Update(Particle* p)
 	if (!p->isLaminarOn())
 	{
 		// Calculates magnitude of velocity
-		const double _velMag = Vector3f::Magnitude(waterCurrentVel);
+		const auto _velMag = Vector3f::Magnitude(waterCurrentVel);
 
 		// Calculates unit of vector of velocity
 		const auto _unitVel = Vector3f::Normalize(waterCurrentVel);

@@ -6,13 +6,20 @@ struct Vector3 final
 {
 	T x, y, z;
 
-	Vector3();
-	Vector3(const T x, const T y, const T z);
-	Vector3(const T f);
+	Vector3()
+	{
+		x = y = z = 0;
+	}
 
-	~Vector3();
+	Vector3(const T x, const T y, const T z) : x(x), y(y), z(z)
+	{ /* Empty */}
 
-	T& operator[](size_t index) { return *(reinterpret_cast<T*>(this) + index); }
+	Vector3(const T f)
+	{
+		x = y = z = f;
+	}
+
+	~Vector3() = default;
 
 	static T Magnitude(const Vector3& v);
 
@@ -45,6 +52,8 @@ struct Vector3 final
 	// Calculates distance between two 3D objects
 	T Distance(const Vector3 &v);
 
+	T& operator[](size_t index)																	{ return *(reinterpret_cast<T*>(this) + index); }
+
 	// Overloads + operator to add two vectors objects
 	Vector3 operator+(const Vector3& v) const													{ return Vector3(this->x + v.x, this->y + v.y, this->z + v.z); }
 
@@ -52,13 +61,13 @@ struct Vector3 final
 	Vector3 operator-(const Vector3& v) const													{ return Vector3(this->x - v.x, this->y - v.y, this->z - v.z); }
 
 	// Overloads * operator to multiply a vector and float object
-	Vector3 operator*(const T& f) const															{ return Vector3(this->x * f, this->y * f, this->z * f); }
+	Vector3 operator*(const T f) const															{ return Vector3(this->x * f, this->y * f, this->z * f); }
 
 	// Overloads * operator to multiply two vector objects
 	Vector3 operator*(const Vector3& v) const													{ return Vector3(this->x * v.x, this->y * v.y, this->z * v.z); }
 
 	// Overloads / operator to divide a vector and float object
-	Vector3 operator/(const T& f) const															{ return Vector3(this->x / f, this->y / f, this->z / f); }
+	Vector3 operator/(const T f) const															{ return Vector3(this->x / f, this->y / f, this->z / f); }
 	
 	// Overloads / operator to divide two vectors objects
 	Vector3 operator/(const Vector3& v) const													{ return Vector3(this->x / v.x, this->y / v.y, this->z / v.z); }
@@ -97,7 +106,7 @@ struct Vector3 final
 	}
 
 	// divides current vector3 value by a float and sets variable to it
-	Vector3& operator/=(const T& f)
+	Vector3& operator/=(const T f)
 	{
 		*this = *this / f;
 
@@ -113,7 +122,7 @@ struct Vector3 final
 	}
 
 	// multiply current vector3 value by a float and sets variable to it
-	Vector3& operator*=(const T& f)
+	Vector3& operator*=(const T f)
 	{
 		*this = *this * f;
 

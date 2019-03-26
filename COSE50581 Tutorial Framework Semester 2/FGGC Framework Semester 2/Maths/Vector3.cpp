@@ -1,26 +1,7 @@
 #include "Vector3.h"
 #include <corecrt_math_defines.h>
 #include <cmath>
-
-template<class T>
-Vector3<T>::Vector3(const T x, const T y, const T z) : x(x), y(y), z(z)
-{ /*Empty*/ }
-
-template<class T>
-Vector3<T>::Vector3(const T f)
-{
-	x = y = z = f;
-}
-
-template<class T>
-Vector3<T>::Vector3()
-{
-	x = y = z = 0.f;
-}
-
-template<class T>
-Vector3<T>::~Vector3()
-= default;
+#include <complex>
 
 template <class T>
 T Vector3<T>::MagnitudeSQ(const Vector3& v)
@@ -28,10 +9,10 @@ T Vector3<T>::MagnitudeSQ(const Vector3& v)
 	return (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
 }
 
-template<class T>
-T Vector3<T>::Magnitude(const Vector3 &v)
+template <class T>
+T Vector3<T>::Magnitude(const Vector3& v)
 {
-	return sqrtf(MagnitudeSQ(v));
+	return std::sqrt(Vector3::MagnitudeSQ(v));
 }
 
 template<class T>
@@ -43,7 +24,7 @@ T Vector3<T>::DotProduct(const Vector3& v, const Vector3& u)
 template<class T>
 T Vector3<T>::AngleBetweenVectors(const Vector3& v, const Vector3& u, const bool inDegrees)
 {
-	const float angle = DotProduct(v, u) / (Magnitude(v) * Magnitude(u));
+	const float angle = Vector3::DotProduct(v, u) / (Vector3::Magnitude(v) * Vector3::Magnitude(u));
 	
 	const float toDegrees = 180.f / M_PI;
 
@@ -53,7 +34,7 @@ T Vector3<T>::AngleBetweenVectors(const Vector3& v, const Vector3& u, const bool
 template<class T>
 Vector3<T> Vector3<T>::CrossProduct(const Vector3& u, const Vector3& v)
 {
-	return Vector3<T>(u.y * v.z - u.z  * v.y,
+	return Vector3(u.y * v.z - u.z  * v.y,
 		u.z * v.x - u.x * v.z, 
 		u.x * v.y - u.y * v.x);
 }
@@ -61,7 +42,7 @@ Vector3<T> Vector3<T>::CrossProduct(const Vector3& u, const Vector3& v)
 template<class T>
 Vector3<T> Vector3<T>::Normalize(const Vector3& v)
 {
-	const float mag = Magnitude(v);	
+	const float mag = Vector3::Magnitude(v);
 
 	return mag == 0 ? v / mag : v;
 }
@@ -75,9 +56,9 @@ void Vector3<T>::Zero()
 template<class T>
 void Vector3<T>::Truncate(const float max)
 {
-	if (fabsf(Magnitude(*this)) > max)
+	if (::fabsf(Vector3::Magnitude(*this)) > max)
 	{
-		*this = Normalize(*this) * max;
+		*this = Vector3::Normalize(*this) * max;
 	}
 }
 
@@ -90,13 +71,13 @@ Vector3<T> Vector3<T>::ReverseVector()
 template <class T>
 void Vector3<T>::ToPositives()
 {
-	x < 0 ? x = fabsf(x) : x;
-	y < 0 ? y = fabsf(y) : y;
-	z < 0 ? z = fabsf(z) : z;
+	x < 0 ? x = ::fabsf(x) : x;
+	y < 0 ? y = ::fabsf(y) : y;
+	z < 0 ? z = ::fabsf(z) : z;
 }
 
 template<class T>
 T Vector3<T>::Distance(const Vector3& v)
 {
-	return Magnitude(v - *this);
+	return Vector3::Magnitude(v - *this);
 }
