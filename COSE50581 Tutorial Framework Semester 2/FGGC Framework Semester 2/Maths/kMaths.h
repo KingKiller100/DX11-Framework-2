@@ -11,14 +11,14 @@ typedef  Vector3<unsigned>	Vector3u;
 
 #define TAU (M_PI * 2)
 
-template<class TypePrecision>
-TypePrecision RadiansToDegrees(const TypePrecision radians)															{ return radians * std::forward<TypePrecision>(360.0 / TAU); }
+template<class TP>
+TP RadiansToDegrees(const TP radians)									{ return radians * std::forward<TP>(360.0 / TAU); }
 
-template<class TypePrecision>
-TypePrecision DegreesToRadians(const TypePrecision degrees)															{ return degrees * std::forward<TypePrecision>(TAU / 360.f); }
+template<class TP>
+TP DegreesToRadians(const TP degrees)									{ return degrees * std::forward<TP>(TAU / 360.f); }
 
-template<class TypePrecision>
-TypePrecision Clamp(const TypePrecision value, const TypePrecision min, const TypePrecision max)					{ return std::forward<TypePrecision>(std::min(std::max(value, min), max)); }
+template<class TP>
+TP Clamp(const TP value, const TP min, const TP max)					{ return std::forward<TP>(std::min(std::max(value, min), max)); }
 
-template<class TypePrecision>
-TypePrecision AbsClamp(const TypePrecision value, const TypePrecision min, const TypePrecision max)					{ return value >= 0 ? Clamp(value, min, max) : -Clamp(value, min, max); }
+template<class TP>
+TP AbsClamp(const TP value, const TP min, const TP max)					{ return value >= 0 ? ::Clamp(value, min, max) : -::Clamp(value, min, max); }

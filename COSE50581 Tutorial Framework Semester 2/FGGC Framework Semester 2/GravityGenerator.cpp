@@ -7,11 +7,10 @@ GravityGenerator::GravityGenerator() : currentGravity(Vector3f(0, 9.81f, 0))
 	realGravity = currentGravity;
 }
 
-GravityGenerator::GravityGenerator(const Vector3f &gravity) : currentGravity(gravity)
+GravityGenerator::GravityGenerator(const float g) : currentGravity(Vector3f(0, g, 0))
 {
 	realGravity = currentGravity;
 }
-
 
 GravityGenerator::~GravityGenerator()
 = default;

@@ -6,7 +6,7 @@ class Particle;
 class ForceGenerator
 {
 public:
-	virtual ~ForceGenerator() = 0;
+	virtual ~ForceGenerator() = default;
 	virtual void Update(Particle* p) = 0;
 };
 

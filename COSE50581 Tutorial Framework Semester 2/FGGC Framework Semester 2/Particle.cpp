@@ -20,7 +20,7 @@ Particle::Particle(Transformation * transform) : _transform(transform)
 
 	lifeTimer = -1;
 
-	forcesMap.insert(std::pair<std::string, ForceGenerator*>("gravity", new GravityGenerator(-9.81)));
+	forcesMap.insert(std::pair<std::string, ForceGenerator*>("gravity", new GravityGenerator(-9.81f / 8)));
 }
 
 Particle::~Particle()
@@ -48,7 +48,7 @@ void Particle::Update(const float t)
 
 	netForce.Zero();
 
-	lifeTimer += t;  
+	lifeTimer += dt;  
 }
 
 void Particle::AddForce(const Vector3f &f)

@@ -84,11 +84,11 @@ int QuadTree::GetIndex(class GameObject* g) const
 	signed int index = -1;
 	const Vector3f midpoint = bounds->position;
 
-	const auto particle = *g->GetParticle();
-	const auto transform = *g->GetTransformation();
+	const auto particle = g->GetParticle();
+	const auto transform = g->GetTransformation();
 
-	const float radius = particle.GetRadius();	
-	const Vector3f position = transform.GetPosition();
+	const float radius = particle->GetRadius();	
+	const Vector3f position = transform->GetPosition();
 
 	// Can object fully fit inside top quadrant
 	const bool topQuad = position.z - radius > midpoint.z;

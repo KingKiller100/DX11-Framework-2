@@ -224,10 +224,6 @@ HRESULT Application::Initialise(HINSTANCE hInstance, int nCmdShow)
 		_goManager->AddParticle(cube);
 	}
 
-	gravity = new GravityGenerator();
-	lamDrag = new LaminarDragGenerator();
-	turbDrag = new TurbulentDragGenerator();
-
 	ControllerManager::Instance()->init(_goManager);
 
 	ControllerManager::Instance()->init(_goManager);
@@ -720,7 +716,6 @@ void Application::Update()
 {
     // Update our time
     static float elapsedTime = Clock<>::GetElapsedTime();
-	elapsedTime = elapsedTime > 0.016666667 ? 1.f / 60.f : elapsedTime;
 
 	UpdateCamera(); // Updates camera
 
@@ -743,12 +738,13 @@ void Application::Update()
 
 	for (auto gameObject : _goManager->GetGameObjectList())
 	{
-		returnList.clear();
-		quad.retrieve(returnList, gameObject);
-	
-		for (auto gameObject2 : returnList)
+		// returnList.clear();
+		// quad.retrieve(returnList, gameObject);
+		
+		for (auto gameObject2 : _goManager->GetGameObjectList())
 		{
-			CollisionsManager::Instance()->Update(gameObject, gameObject2);
+			if (gameObject->GetType() != gameObject2->GetType())
+				CollisionsManager::Instance()->Update(gameObject, gameObject2);
 		}
 
 		// Loops particles around the game board

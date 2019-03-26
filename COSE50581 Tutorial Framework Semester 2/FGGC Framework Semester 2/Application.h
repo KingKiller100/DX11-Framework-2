@@ -113,9 +113,6 @@ private:
 	UINT _WindowWidth;
 
 	GameObjectManager* _goManager;
-	GravityGenerator* gravity;
-	LaminarDragGenerator* lamDrag;
-	TurbulentDragGenerator* turbDrag;
 
 	// Render dimensions - Change here to alter screen resolution
 	UINT _renderHeight = 1080;

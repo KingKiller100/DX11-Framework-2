@@ -1,85 +1,94 @@
 #pragma once
 #include <algorithm>
 
-template<class T>
+template<class TP> // Type Precision
 struct Vector3 final
 {
-	T x, y, z;
+	TP x, y, z;
+
+	Vector3(const TP x, const TP y, const TP z) : x(x), y(y), z(z)
+	{ /* Empty */}
 
 	Vector3()
 	{
 		x = y = z = 0;
 	}
 
-	Vector3(const T x, const T y, const T z) : x(x), y(y), z(z)
-	{ /* Empty */}
-
-	Vector3(const T f)
+	Vector3(const TP f)
 	{
 		x = y = z = f;
 	}
 
 	~Vector3() = default;
 
-	static T Magnitude(const Vector3& v);
+	// Restricts vector value to max value
+	void Truncate(const float max);
 
-	static T MagnitudeSQ(const Vector3& v);
-		
-	// Produces the dot product
-	static T DotProduct(const Vector3& v, const Vector3& u);
+	// Reassigns values to be positives
+	void ToPositives();
 
 	// Finds angle between two vectors in degrees/radians
-	static T AngleBetweenVectors(const Vector3& v, const Vector3& u, const bool inDegrees = false);
+	static TP AngleBetweenVectors(const Vector3& v, const Vector3& u, const bool inDegrees = false);
 
 	// Outputs the normal between two vectors
 	static auto CrossProduct(const Vector3& u, const Vector3& v) -> Vector3;
 
 	// Normalizes a vector
-	static Vector3 Normalize(const Vector3& v);
+	static Vector3 Normalize(const Vector3& v)										{ const float mag = Vector3::Magnitude(v); return mag != 0 ? v / mag : v; }
 
-	// Restricts vector value to max value
-	void Truncate(const float max);
+	// Pure length of the vector
+	static TP MagnitudeSQ(const Vector3& v)											{ return (v.x * v.x) + (v.y * v.y) + (v.z * v.z); }
 
-	// Sets all values of the vector to zero
-	void Zero();
-
-	// Returns vector times by -1 - does not reassign values
-	Vector3 ReverseVector();
-
-	// Reassigns values to be positives
-	void ToPositives();
+	// Square rooted length of the vector
+	static TP Magnitude(const Vector3& v)											{ return std::sqrt(Vector3::MagnitudeSQ(v)); }
+		
+	// Produces the dot product
+	static TP DotProduct(const Vector3& v, const Vector3& u)						{ return (u.x * v.x) + (u.y * v.y) + (u.z * v.z); }
 
 	// Calculates distance between two 3D objects
-	T Distance(const Vector3 &v);
+	TP Distance(const Vector3 &v)													{ return Vector3::Magnitude(v - *this); }
 
-	T& operator[](size_t index)																	{ return *(reinterpret_cast<T*>(this) + index); }
+	// Returns vector times by -1 - does not reassign values
+	Vector3 ReverseVector()															{ return *this * -1; }
+
+	// Sets all values of the vector to zero
+	void Zero()																		{ *this = Vector3(); }
+
+	TP& operator[](size_t index)													{ return *(reinterpret_cast<TP*>(this) + index); }
 
 	// Overloads + operator to add two vectors objects
-	Vector3 operator+(const Vector3& v) const													{ return Vector3(this->x + v.x, this->y + v.y, this->z + v.z); }
+	Vector3 operator+(const Vector3& v) const										{ return Vector3(this->x + v.x, this->y + v.y, this->z + v.z); }
 
 	// Overloads - operator to subtract two vectors objects
-	Vector3 operator-(const Vector3& v) const													{ return Vector3(this->x - v.x, this->y - v.y, this->z - v.z); }
+	Vector3 operator-(const Vector3& v) const										{ return Vector3(this->x - v.x, this->y - v.y, this->z - v.z); }
 
 	// Overloads * operator to multiply a vector and float object
-	Vector3 operator*(const T f) const															{ return Vector3(this->x * f, this->y * f, this->z * f); }
+	Vector3 operator*(const TP f) const												{ return Vector3(this->x * f, this->y * f, this->z * f); }
 
 	// Overloads * operator to multiply two vector objects
-	Vector3 operator*(const Vector3& v) const													{ return Vector3(this->x * v.x, this->y * v.y, this->z * v.z); }
+	Vector3 operator*(const Vector3& v) const										{ return Vector3(this->x * v.x, this->y * v.y, this->z * v.z); }
 
 	// Overloads / operator to divide a vector and float object
-	Vector3 operator/(const T f) const															{ return Vector3(this->x / f, this->y / f, this->z / f); }
+	Vector3 operator/(const TP f) const												{ return Vector3(this->x / f, this->y / f, this->z / f); }
 	
 	// Overloads / operator to divide two vectors objects
-	Vector3 operator/(const Vector3& v) const													{ return Vector3(this->x / v.x, this->y / v.y, this->z / v.z); }
+	Vector3 operator/(const Vector3& v) const										{ return Vector3(this->x / v.x, this->y / v.y, this->z / v.z); }
 
 	// Overloads = operator to make one vector axis values equal to another
-	Vector3 &operator=(const Vector3& v)														{ return std::move(Vector3(this->x = v.x, this->y = v.y, this->z = v.z)); }
-																								
-	// bool operator == returns true if both Vector3D values are equal							
-	bool operator==(const Vector3& v) const														{ return (this->x == v.x && this->y == v.y && this->z == v.z); }
-																								
-	// bool operator != returns true if both Vector3D values are NOT equal						
-	bool operator!=(const Vector3& v) const														{ return !(*this == v); }
+	Vector3 &operator=(const Vector3& v)
+	{
+		x = v.x;
+		y = v.y;
+		z = v.z;
+
+		return *this;
+	}
+																					
+	// bool operator == returns true if both Vector3D values are equal				
+	bool operator==(const Vector3& v) const											{ return (this->x == v.x && this->y == v.y && this->z == v.z); }
+																					
+	// bool operator != returns true if both Vector3D values are NOT equal			
+	bool operator!=(const Vector3& v) const											{ return !(*this == v); }
 
 	// adds to current vector3 value
 	Vector3& operator+=(const Vector3& v)
@@ -106,7 +115,7 @@ struct Vector3 final
 	}
 
 	// divides current vector3 value by a float and sets variable to it
-	Vector3& operator/=(const T f)
+	Vector3& operator/=(const TP f)
 	{
 		*this = *this / f;
 
@@ -122,7 +131,7 @@ struct Vector3 final
 	}
 
 	// multiply current vector3 value by a float and sets variable to it
-	Vector3& operator*=(const T f)
+	Vector3& operator*=(const TP f)
 	{
 		*this = *this * f;
 

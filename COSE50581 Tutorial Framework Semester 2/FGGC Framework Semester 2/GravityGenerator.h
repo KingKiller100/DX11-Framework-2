@@ -1,11 +1,18 @@
 #pragma once
 
 #include "ForceGenerator.h"
+
 class GravityGenerator final : public ForceGenerator
 {
 public:
 	GravityGenerator();
-	GravityGenerator(const Vector3f &gravity);
+	GravityGenerator(const float g);
+	
+	template<class T>
+	GravityGenerator(T) = delete;
+	template<class T>
+	GravityGenerator(T &) = delete;
+
 	~GravityGenerator();
 
 	float GetGravity() const											{ return currentGravity.y; }
